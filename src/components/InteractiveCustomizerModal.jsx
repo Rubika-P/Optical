@@ -273,7 +273,7 @@ const InteractiveCustomizerModal = () => {
                 <div className="p-3 bg-[#1A1814] border border-[#C5A880]/30 text-xs text-[#D8CFBF] space-y-1">
                   <div className="flex items-center space-x-1.5 text-[#C5A880] font-semibold text-[11px]">
                     <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>LUMÉRA Bespoke Guarantee</span>
+                    <span>GRAND OPTICALS Bespoke Guarantee</span>
                   </div>
                   <p className="text-[10px] text-[#9E968E]">
                     Laser micro-etching is performed under 40x magnification with 2-year alignment warranty.

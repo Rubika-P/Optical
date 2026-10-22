@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <defs>
+    <linearGradient id="goBlueGrad" x1="100" y1="10" x2="300" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#0052A3" />
+      <stop offset="45%" stopColor="#0077D4" />
+      <stop offset="75%" stopColor="#00A3E0" />
+      <stop offset="100%" stopColor="#004085" />
+    </linearGradient>
+
+    <radialGradient id="irisGrad" cx="200" cy="55" r="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#001833" />
+      <stop offset="25%" stopColor="#004E92" />
+      <stop offset="60%" stopColor="#008BE3" />
+      <stop offset="85%" stopColor="#00B4D8" />
+      <stop offset="100%" stopColor="#48CAE4" />
+    </radialGradient>
+
+    <linearGradient id="frameGrad" x1="120" y1="35" x2="280" y2="35" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#004D99" />
+      <stop offset="50%" stopColor="#007ACC" />
+      <stop offset="100%" stopColor="#004D99" />
+    </linearGradient>
+  </defs>
+
+  <!-- Spectacle Wings -->
+  <g stroke="url(#frameGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 160 38 C 145 35 125 34 116 46 C 112 52 114 62 120 66" />
+    <path d="M 240 38 C 255 35 275 34 284 46 C 288 52 286 62 280 66" />
+  </g>
+
+  <!-- G Monogram & Enclosure -->
+  <path d="M 200 6 C 230 6 254 24 259 50 C 256 48 248 46 238 46 C 230 30 216 20 200 20 C 176 20 156 36 152 58 C 149 76 162 94 182 100 C 202 106 224 100 236 86 C 240 81 243 75 244 68 L 224 68 C 220 75 213 80 203 82 C 185 84 169 73 167 56 C 170 41 185 29 200 29 C 213 29 224 36 228 47 C 216 42 184 42 172 56 C 182 68 218 68 228 56 L 260 56 C 260 65 257 75 251 84 C 239 103 214 112 191 109 C 163 105 142 84 140 57 C 138 27 167 6 200 6 Z" fill="url(#goBlueGrad)" />
+
+  <!-- Eyebrow curve -->
+  <path d="M 172 40 C 184 30 216 30 228 40 C 220 35 180 35 172 40 Z" fill="#005BAA" />
+
+  <!-- Iris & Pupil -->
+  <circle cx="200" cy="55" r="20" fill="url(#irisGrad)" />
+  <circle cx="200" cy="55" r="16" stroke="#38BDF8" stroke-width="1" stroke-dasharray="2 3" opacity="0.6" />
+  <circle cx="200" cy="55" r="8.5" fill="#030712" />
+  <circle cx="203" cy="52" r="2.8" fill="#FFFFFF" opacity="0.95" />
+  <circle cx="196" cy="58" r="1.3" fill="#E0F2FE" opacity="0.8" />
+
+  <!-- Brand Typography -->
+  <text x="200" y="145" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="28" letter-spacing="3" fill="#0B4D8C">GRAND OPTICALS</text>
+
+  <!-- Rule & Eye Clinic -->
+  <line x1="80" y1="168" x2="140" y2="168" stroke="#0284C7" stroke-width="1.8" />
+  <text x="200" y="172" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="13" letter-spacing="5" fill="#0284C7">EYE CLINIC</text>
+  <line x1="260" y1="168" x2="320" y2="168" stroke="#0284C7" stroke-width="1.8" />
+
+  <!-- Slogan -->
+  <text x="200" y="200" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="500" font-size="11" letter-spacing="1.5" fill="#1E3A5F">Better Vision | Brighter Tomorrow</text>
+  <path d="M 140 212 C 175 220 225 220 260 212" stroke="#0284C7" stroke-width="1.5" stroke-linecap="round" />
+</svg>

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Calendar, Clock, MapPin, Sparkles, Check, CheckCircle2, User, Mail, Phone, ArrowRight, ShieldCheck, Download } from 'lucide-react';
+import { Calendar, Clock, MapPin, Sparkles, Check, CheckCircle2, User, Mail, Phone, ArrowRight, ShieldCheck, Download, Activity, Eye } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 import { STORES } from '../data/products';
+import GrandOpticalsLogo from '../components/GrandOpticalsLogo';
 
 const BookAppointment = () => {
   const [searchParams] = useSearchParams();
-  const initialService = searchParams.get('service') || 'Comprehensive Eye Test';
-  const initialLocation = searchParams.get('location') || STORES[0].name;
+  const initialService = searchParams.get('service') || 'Comprehensive Digital Eye Exam';
+  const initialLocation = searchParams.get('location') || 'Grand Opticals Flagship Eye Clinic';
 
   const { bookAppointment } = useShop();
 
@@ -15,7 +16,7 @@ const BookAppointment = () => {
     name: '',
     email: '',
     phone: '',
-    date: '2026-09-30',
+    date: '2026-10-25',
     time: '11:00 AM',
     service: initialService,
     location: initialLocation,
@@ -25,16 +26,22 @@ const BookAppointment = () => {
   const [confirmedBooking, setConfirmedBooking] = useState(null);
 
   const services = [
-    { name: 'Comprehensive Eye Test', duration: '45 mins', price: '$95 (Credited with Frame purchase)' },
-    { name: 'Contact Lens Consultation', duration: '30 mins', price: '$65' },
-    { name: 'Bespoke Frame Consultation & Styling', duration: '40 mins', price: 'Complimentary' },
-    { name: 'Ultrasonic Frame Restoration & Adjustment', duration: '20 mins', price: 'Complimentary' }
+    { name: 'Comprehensive Digital Eye Exam', duration: '40 mins', price: 'Free with Frame Purchase' },
+    { name: 'Contact Lens Consultation & Fitting', duration: '30 mins', price: 'Complimentary' },
+    { name: 'Bespoke Frame Fitting & Facial Styling', duration: '35 mins', price: 'Complimentary' },
+    { name: 'Ultrasonic Frame Deep Clean & Realignment', duration: '15 mins', price: 'Complimentary' }
   ];
 
   const timeSlots = [
-    '10:30 AM', '11:00 AM', '11:45 AM',
-    '01:30 PM', '02:15 PM', '03:00 PM',
-    '04:00 PM', '05:00 PM', '06:00 PM'
+    '10:00 AM', '11:00 AM', '11:45 AM',
+    '01:30 PM', '02:30 PM', '03:30 PM',
+    '04:30 PM', '05:30 PM', '06:30 PM'
+  ];
+
+  const clinicBranches = [
+    { name: 'Grand Opticals Flagship Eye Clinic', address: 'Boutique & Advanced Refractive Suite' },
+    { name: 'Grand Opticals — Downtown Vision Pavilion', address: 'Full Clinical Optometry & Dispensary' },
+    { name: 'Grand Opticals — Optical Galleria Studio', address: 'Designer Eyewear & Lens Express Bar' }
   ];
 
   const handleSubmit = (e) => {
@@ -44,63 +51,87 @@ const BookAppointment = () => {
   };
 
   return (
-    <div className="bg-[#FBF9F5] min-h-screen text-[#171717] py-12 sm:py-16">
+    <div className="bg-[#F8FAFC] min-h-screen text-[#0F172A] py-12 sm:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header with Visual Banner */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs uppercase tracking-[0.3em] text-[#8C847A] font-semibold block mb-2">
-            Clinical Consultation
+          <div className="flex justify-center mb-4">
+            <GrandOpticalsLogo variant="stacked" size="sm" />
+          </div>
+          <span className="inline-flex items-center space-x-1.5 text-xs uppercase tracking-[0.25em] text-[#0284C7] font-bold mb-2 px-3 py-1 bg-[#F0F7FF] rounded-full border border-[#BAE6FD]">
+            <Activity className="w-3.5 h-3.5" />
+            <span>Grand Opticals Clinical Care</span>
           </span>
-          <h1 className="font-serif text-3xl sm:text-5xl font-normal text-[#171717] mb-3">
-            Book An Eye Appointment
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#0B4D8C] mb-3">
+            Schedule Your In-Clinic Eye Exam
           </h1>
-          <p className="text-xs sm:text-sm text-[#6B655F]">
-            Reserve your session with certified ophthalmic specialists at any LUMÉRA boutique worldwide.
+          <p className="text-xs sm:text-sm text-[#64748B]">
+            Reserve your one-on-one session with certified optometrists in our modern ophthalmic examination suite.
           </p>
+        </div>
+
+        {/* Visual Suite Preview Banner */}
+        <div className="mb-8 rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-md relative h-48 sm:h-56">
+          <img 
+            src="/clinic/exam-room.jpg" 
+            alt="Grand Opticals Examination Suite" 
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#072F5F]/90 via-[#072F5F]/60 to-transparent flex items-center p-6 sm:p-8">
+            <div className="max-w-md text-white">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[#38BDF8] block mb-1">
+                State-of-the-art diagnostics
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold mb-1">Advanced Computerized Refraction</h3>
+              <p className="text-xs text-[#E2E8F0] line-clamp-2">
+                Digital phoropter and slit-lamp corneal inspection ensuring crystal clarity for your custom lenses.
+              </p>
+            </div>
+          </div>
         </div>
 
         {confirmedBooking ? (
           /* Confirmation Pass Screen */
-          <div className="bg-white border border-[#ECE6DC] p-8 sm:p-12 shadow-md animate-in zoom-in-95 duration-300">
-            <div className="text-center pb-8 border-b border-[#ECE6DC]">
-              <div className="w-16 h-16 rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center mx-auto mb-4">
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-8 sm:p-12 shadow-xl animate-in zoom-in-95 duration-300">
+            <div className="text-center pb-8 border-b border-[#E2E8F0]">
+              <div className="w-16 h-16 rounded-full bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center mx-auto mb-4 border border-[#BAE6FD]">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <span className="text-xs uppercase tracking-widest text-[#2E7D32] font-semibold">
-                Booking Confirmed
+              <span className="text-xs uppercase tracking-widest text-[#0284C7] font-bold">
+                Appointment Confirmed
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl text-[#171717] mt-1 mb-2">
-                We Look Forward To Seeing You
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0B4D8C] mt-1 mb-2">
+                We Look Forward To Welcoming You
               </h2>
-              <p className="text-xs text-[#7A736B]">
-                Booking Reference: <strong className="text-[#171717] font-mono text-sm">{confirmedBooking.id}</strong>
+              <p className="text-xs text-[#64748B]">
+                Booking Reference: <strong className="text-[#0B4D8C] font-mono text-sm">{confirmedBooking.id}</strong>
               </p>
             </div>
 
             {/* Pass details card */}
-            <div className="py-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-[#57534E]">
-              <div className="p-4 bg-[#FAF7F2] border border-[#EADBCA] space-y-1">
-                <span className="text-[#8C847A] uppercase tracking-wider text-[10px]">Patient Name</span>
-                <p className="font-semibold text-sm text-[#171717]">{confirmedBooking.name}</p>
-                <p className="text-[#7A736B]">{confirmedBooking.email} · {confirmedBooking.phone}</p>
+            <div className="py-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl space-y-1">
+                <span className="text-[#64748B] uppercase tracking-wider text-[10px] font-bold">Patient Name</span>
+                <p className="font-bold text-sm text-[#0B4D8C]">{confirmedBooking.name}</p>
+                <p className="text-[#64748B]">{confirmedBooking.email} · {confirmedBooking.phone}</p>
               </div>
 
-              <div className="p-4 bg-[#FAF7F2] border border-[#EADBCA] space-y-1">
-                <span className="text-[#8C847A] uppercase tracking-wider text-[10px]">Service</span>
-                <p className="font-semibold text-sm text-[#171717]">{confirmedBooking.service}</p>
-                <p className="text-[#7A736B]">Clinical Consultation</p>
+              <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl space-y-1">
+                <span className="text-[#64748B] uppercase tracking-wider text-[10px] font-bold">Service</span>
+                <p className="font-bold text-sm text-[#0B4D8C]">{confirmedBooking.service}</p>
+                <p className="text-[#64748B]">Digital Diagnostic Protocol</p>
               </div>
 
-              <div className="p-4 bg-[#FAF7F2] border border-[#EADBCA] space-y-1">
-                <span className="text-[#8C847A] uppercase tracking-wider text-[10px]">Date & Time</span>
-                <p className="font-semibold text-sm text-[#171717]">{confirmedBooking.date} at {confirmedBooking.time}</p>
-                <p className="text-[#7A736B]">Please arrive 10 minutes prior</p>
+              <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl space-y-1">
+                <span className="text-[#64748B] uppercase tracking-wider text-[10px] font-bold">Date & Time</span>
+                <p className="font-bold text-sm text-[#0B4D8C]">{confirmedBooking.date} at {confirmedBooking.time}</p>
+                <p className="text-[#64748B]">Please arrive 5-10 minutes early</p>
               </div>
 
-              <div className="p-4 bg-[#FAF7F2] border border-[#EADBCA] space-y-1">
-                <span className="text-[#8C847A] uppercase tracking-wider text-[10px]">Boutique Location</span>
-                <p className="font-semibold text-sm text-[#171717]">{confirmedBooking.location}</p>
-                <p className="text-[#7A736B]">VIP Examination Lounge</p>
+              <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl space-y-1">
+                <span className="text-[#64748B] uppercase tracking-wider text-[10px] font-bold">Clinic Location</span>
+                <p className="font-bold text-sm text-[#0B4D8C]">{confirmedBooking.location}</p>
+                <p className="text-[#64748B]">Grand Opticals Reception Desk</p>
               </div>
             </div>
 
@@ -108,13 +139,13 @@ const BookAppointment = () => {
             <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/shop"
-                className="px-8 py-3.5 bg-[#171717] hover:bg-[#C5A880] text-white hover:text-[#141414] text-xs font-semibold uppercase tracking-widest text-center transition-colors"
+                className="px-8 py-3.5 bg-[#0B4D8C] hover:bg-[#0284C7] text-white text-xs font-bold uppercase tracking-wider rounded-xl text-center transition-colors shadow-md"
               >
-                Browse Eyewear Catalog
+                Pre-Select Your Frames Online
               </Link>
               <button
                 onClick={() => setConfirmedBooking(null)}
-                className="px-6 py-3.5 border border-[#DCD3C5] text-xs font-semibold uppercase tracking-widest text-[#57534E] hover:text-[#171717] text-center"
+                className="px-6 py-3.5 border border-[#E2E8F0] text-xs font-bold uppercase tracking-wider text-[#64748B] hover:text-[#0B4D8C] rounded-xl text-center"
               >
                 Book Another Appointment
               </button>
@@ -122,11 +153,11 @@ const BookAppointment = () => {
           </div>
         ) : (
           /* Booking Form */
-          <form onSubmit={handleSubmit} className="bg-white border border-[#ECE6DC] p-6 sm:p-10 shadow-sm space-y-8">
+          <form onSubmit={handleSubmit} className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 shadow-lg space-y-8">
             {/* Service Selection */}
             <div>
-              <label className="block text-xs uppercase tracking-wider font-semibold text-[#171717] mb-3">
-                1. Select Desired Clinical Service
+              <label className="block text-xs uppercase tracking-wider font-bold text-[#0B4D8C] mb-3">
+                1. Select Eye Care Service
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {services.map((svc) => (
@@ -134,19 +165,19 @@ const BookAppointment = () => {
                     key={svc.name}
                     type="button"
                     onClick={() => setFormData({ ...formData, service: svc.name })}
-                    className={`p-4 text-left border transition-all ${
+                    className={`p-4 text-left rounded-xl border transition-all cursor-pointer ${
                       formData.service === svc.name
-                        ? 'border-[#171717] bg-[#FAF7F2] ring-1 ring-[#171717]'
-                        : 'border-[#E0D8CB] hover:border-[#171717] bg-white'
+                        ? 'border-[#0284C7] bg-[#F0F7FF] ring-2 ring-[#0284C7]/20 shadow-sm'
+                        : 'border-[#E2E8F0] hover:border-[#0284C7] bg-white'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-serif text-base font-medium text-[#171717]">{svc.name}</span>
-                      {formData.service === svc.name && <Check className="w-4 h-4 text-[#8B6B3F]" />}
+                      <span className="text-sm font-bold text-[#0B4D8C]">{svc.name}</span>
+                      {formData.service === svc.name && <Check className="w-4 h-4 text-[#0284C7]" />}
                     </div>
-                    <div className="flex justify-between text-[11px] text-[#7A736B]">
+                    <div className="flex justify-between text-[11px] text-[#64748B] mt-1">
                       <span>{svc.duration}</span>
-                      <span className="text-[#8B6B3F] font-semibold">{svc.price}</span>
+                      <span className="text-[#0284C7] font-bold">{svc.price}</span>
                     </div>
                   </button>
                 ))}
@@ -155,16 +186,16 @@ const BookAppointment = () => {
 
             {/* Location Selection */}
             <div>
-              <label className="block text-xs uppercase tracking-wider font-semibold text-[#171717] mb-2">
-                2. Choose Flagship Boutique
+              <label className="block text-xs uppercase tracking-wider font-bold text-[#0B4D8C] mb-2">
+                2. Choose Clinic Branch
               </label>
               <select
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full bg-white border border-[#DCD3C5] px-4 py-3 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-xs text-[#0F172A] font-medium focus:outline-none focus:border-[#0284C7]"
               >
-                {STORES.map((st) => (
-                  <option key={st.id} value={st.name}>
+                {clinicBranches.map((st) => (
+                  <option key={st.name} value={st.name}>
                     {st.name} — {st.address}
                   </option>
                 ))}
@@ -174,7 +205,7 @@ const BookAppointment = () => {
             {/* Date and Time */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs uppercase tracking-wider font-semibold text-[#171717] mb-2">
+                <label className="block text-xs uppercase tracking-wider font-bold text-[#0B4D8C] mb-2">
                   3. Preferred Date
                 </label>
                 <input
@@ -182,18 +213,18 @@ const BookAppointment = () => {
                   required
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full bg-white border border-[#DCD3C5] px-4 py-3 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                  className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider font-semibold text-[#171717] mb-2">
+                <label className="block text-xs uppercase tracking-wider font-bold text-[#0B4D8C] mb-2">
                   4. Available Time Slot
                 </label>
                 <select
                   value={formData.time}
                   onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                  className="w-full bg-white border border-[#DCD3C5] px-4 py-3 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                  className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                 >
                   {timeSlots.map((slot) => (
                     <option key={slot} value={slot}>
@@ -206,7 +237,7 @@ const BookAppointment = () => {
 
             {/* Client Info Fields */}
             <div>
-              <label className="block text-xs uppercase tracking-wider font-semibold text-[#171717] mb-3">
+              <label className="block text-xs uppercase tracking-wider font-bold text-[#0B4D8C] mb-3">
                 5. Patient Details
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -217,7 +248,7 @@ const BookAppointment = () => {
                     placeholder="Full Legal Name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-white border border-[#DCD3C5] px-4 py-3 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                   />
                 </div>
                 <div>
@@ -227,7 +258,7 @@ const BookAppointment = () => {
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white border border-[#DCD3C5] px-4 py-3 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                   />
                 </div>
                 <div>
@@ -237,7 +268,7 @@ const BookAppointment = () => {
                     placeholder="Mobile Phone Number"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-white border border-[#DCD3C5] px-4 py-3 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                    className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
                   />
                 </div>
               </div>
@@ -245,29 +276,30 @@ const BookAppointment = () => {
 
             {/* Special Requests */}
             <div>
-              <label className="block text-xs uppercase tracking-wider font-semibold text-[#171717] mb-2">
+              <label className="block text-xs uppercase tracking-wider font-bold text-[#0B4D8C] mb-2">
                 Special Vision Notes or Prescription History (Optional)
               </label>
               <textarea
                 rows="3"
-                placeholder="e.g. Existing astigmatism, progressive lenses, or request for specific frame models to try..."
+                placeholder="e.g. Existing power, dry eyes, progressive lenses, or specific frame models to try..."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                className="w-full bg-white border border-[#DCD3C5] px-4 py-3 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                className="w-full bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#0284C7]"
               />
             </div>
 
             {/* Submit CTA */}
-            <div className="pt-4 border-t border-[#ECE6DC]">
+            <div className="pt-4 border-t border-[#E2E8F0]">
               <button
                 type="submit"
-                className="w-full py-4 bg-[#171717] hover:bg-[#C5A880] text-white hover:text-[#141414] text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-md flex items-center justify-center space-x-2"
+                className="w-full py-4 bg-[#0B4D8C] hover:bg-[#0284C7] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center space-x-2 cursor-pointer"
               >
+                <Calendar className="w-4 h-4 text-[#38BDF8]" />
                 <span>Confirm & Reserve Appointment</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <p className="text-[10px] text-[#8C847A] text-center mt-2">
-                Complimentary cancellation or rescheduling up to 4 hours before your session.
+              <p className="text-[11px] text-[#64748B] text-center mt-2.5">
+                Grand Opticals Eye Clinic · Complimentary cancellation or rescheduling up to 4 hours prior.
               </p>
             </div>
           </form>

@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      className="group relative flex flex-col h-full bg-[#FFFFFF] border border-[#ECE6DC] hover:border-[#C5A880] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1"
+      className="group relative flex flex-col h-full bg-[#FFFFFF] rounded-2xl overflow-hidden border border-[#E2E8F0] hover:border-[#0284C7] transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -23,13 +23,13 @@ const ProductCard = ({ product }) => {
       <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
         <div className="flex flex-col space-y-1">
           {product.isNew && (
-            <span className="bg-[#171717] text-[#FFFFFF] text-[10px] uppercase tracking-widest px-2.5 py-0.5 font-semibold shadow-xs">
+            <span className="bg-[#0B4D8C] text-white text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-md font-bold shadow-sm">
               New
             </span>
           )}
           {product.isBestSeller && !product.isNew && (
-            <span className="bg-[#C5A880] text-[#141414] text-[10px] uppercase tracking-widest px-2.5 py-0.5 font-semibold shadow-xs">
-              Best Seller
+            <span className="bg-[#0284C7] text-white text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-md font-bold shadow-sm">
+              Clinical Best Seller
             </span>
           )}
         </div>
@@ -42,10 +42,10 @@ const ProductCard = ({ product }) => {
               e.stopPropagation();
               setTryOnProduct(product);
             }}
-            className="flex items-center space-x-1 px-2.5 py-1 bg-black/85 hover:bg-[#C5A880] text-white hover:text-[#141414] text-[9px] uppercase font-bold tracking-wider rounded-none backdrop-blur-md border border-white/20 transition-all duration-200 shadow-sm cursor-pointer hover:scale-105"
+            className="flex items-center space-x-1 px-2.5 py-1 bg-[#072F5F]/90 hover:bg-[#0284C7] text-white text-[9px] uppercase font-bold tracking-wider rounded-lg backdrop-blur-md border border-white/20 transition-all duration-200 shadow-sm cursor-pointer hover:scale-105"
             title="Try on in AR Studio"
           >
-            <Camera className="w-3 h-3" />
+            <Camera className="w-3 h-3 text-[#38BDF8]" />
             <span>Try On</span>
           </button>
 
@@ -58,18 +58,18 @@ const ProductCard = ({ product }) => {
             }}
             className={`p-1.5 rounded-full transition-all duration-300 backdrop-blur-md cursor-pointer ${
               isSaved
-                ? 'bg-[#141414] text-[#C5A880] shadow-md scale-105'
-                : 'bg-white/90 hover:bg-white text-[#171717] hover:text-[#C5A880] shadow-sm'
+                ? 'bg-[#0B4D8C] text-[#38BDF8] shadow-md scale-105'
+                : 'bg-white/90 hover:bg-white text-[#334155] hover:text-[#0B4D8C] shadow-sm'
             }`}
             title={isSaved ? 'Remove from wishlist' : 'Save to wishlist'}
           >
-            <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-[#C5A880] stroke-[#C5A880]' : 'stroke-[1.75]'}`} />
+            <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-[#38BDF8] stroke-[#38BDF8]' : 'stroke-[2]'}`} />
           </button>
         </div>
       </div>
 
-      {/* Main Image Container with ProductImage Fallback & Shimmer */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F6F3ED] flex items-center justify-center">
+      {/* Main Image Container */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
         <Link to={`/product/${product.id}`} className="block w-full h-full">
           <ProductImage
             src={isHovered && product.hoverImage ? product.hoverImage : displayImage}
@@ -88,7 +88,7 @@ const ProductCard = ({ product }) => {
         >
           <button
             onClick={() => setQuickViewProduct(product)}
-            className="flex-1 py-2 px-2 bg-white/95 hover:bg-[#171717] text-[#171717] hover:text-white text-[11px] font-semibold tracking-wider uppercase flex items-center justify-center space-x-1 shadow-md transition-colors cursor-pointer"
+            className="flex-1 py-2 px-2 bg-white/95 hover:bg-[#0B4D8C] text-[#0B4D8C] hover:text-white rounded-lg text-[11px] font-bold tracking-wider uppercase flex items-center justify-center space-x-1 shadow-md transition-colors cursor-pointer border border-[#E2E8F0]"
             title="Quick Preview"
           >
             <Eye className="w-3.5 h-3.5" />
@@ -97,8 +97,8 @@ const ProductCard = ({ product }) => {
           
           <button
             onClick={() => openCustomizer(product)}
-            className="py-2 px-2.5 bg-[#1E1B17] hover:bg-[#C5A880] text-[#C5A880] hover:text-[#171717] border border-[#C5A880]/50 text-[11px] font-semibold tracking-wider uppercase flex items-center justify-center space-x-1 shadow-md transition-colors cursor-pointer"
-            title="360° Bespoke Atelier Customizer"
+            className="py-2 px-2.5 bg-[#F0F7FF] hover:bg-[#0284C7] text-[#0B4D8C] hover:text-white border border-[#BAE6FD] rounded-lg text-[11px] font-bold tracking-wider uppercase flex items-center justify-center space-x-1 shadow-md transition-colors cursor-pointer"
+            title="360° Studio"
           >
             <Layers className="w-3.5 h-3.5" />
             <span>360°</span>
@@ -106,10 +106,10 @@ const ProductCard = ({ product }) => {
 
           <button
             onClick={() => setTryOnProduct(product)}
-            className="py-2 px-2.5 bg-[#171717] hover:bg-[#C5A880] text-white hover:text-[#171717] text-[11px] font-semibold tracking-wider uppercase flex items-center justify-center space-x-1 shadow-md transition-colors cursor-pointer"
-            title="Virtual Try-On with Camera / Photo"
+            className="py-2 px-2.5 bg-[#0B4D8C] hover:bg-[#0284C7] text-white rounded-lg text-[11px] font-bold tracking-wider uppercase flex items-center justify-center space-x-1 shadow-md transition-colors cursor-pointer"
+            title="Virtual Try-On"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#38BDF8]" />
             <span>AR</span>
           </button>
         </div>
@@ -119,30 +119,30 @@ const ProductCard = ({ product }) => {
       <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-white">
         <div>
           {/* Category & Rating */}
-          <div className="flex items-center justify-between text-[11px] text-[#7A736B] tracking-wider uppercase mb-1.5 font-medium">
+          <div className="flex items-center justify-between text-[11px] text-[#64748B] tracking-wider uppercase mb-1.5 font-semibold">
             <span>{product.category} · {product.rimType}</span>
-            <span className="flex items-center space-x-1 text-[#4A4744]">
-              <span className="text-[#C5A880]">★</span>
-              <span className="font-semibold text-black">{product.rating}</span>
-              <span className="text-[#9E968E]">({product.reviews})</span>
+            <span className="flex items-center space-x-1 text-[#334155]">
+              <span className="text-[#F59E0B]">★</span>
+              <span className="font-bold text-[#0F172A]">{product.rating}</span>
+              <span className="text-[#94A3B8]">({product.reviews})</span>
             </span>
           </div>
 
           {/* Product Title */}
-          <Link to={`/product/${product.id}`} className="group-hover:text-[#9F8259] transition-colors block">
-            <h3 className="font-serif text-lg sm:text-xl font-medium tracking-wide text-[#171717] leading-tight min-h-[1.5rem]">
+          <Link to={`/product/${product.id}`} className="group-hover:text-[#0284C7] transition-colors block">
+            <h3 className="text-base sm:text-lg font-bold tracking-tight text-[#0F172A] leading-tight min-h-[1.4rem]">
               {product.name}
             </h3>
           </Link>
 
           {/* Subtitle / Silhouette */}
-          <p className="text-xs text-[#736C65] line-clamp-1 mt-1 font-light min-h-[1rem]">
+          <p className="text-xs text-[#64748B] line-clamp-1 mt-1 font-normal min-h-[1rem]">
             {product.subtitle}
           </p>
         </div>
 
         {/* Bottom Swatches & Price */}
-        <div className="mt-4 pt-3 border-t border-[#F0ECE4] flex items-center justify-between">
+        <div className="mt-4 pt-3 border-t border-[#F1F5F9] flex items-center justify-between">
           {/* Color Swatches */}
           <div className="flex items-center space-x-1.5">
             {product.colors?.map((col, idx) => (
@@ -151,7 +151,7 @@ const ProductCard = ({ product }) => {
                 onClick={() => setSelectedColorIdx(idx)}
                 className={`w-4 h-4 rounded-full border transition-all cursor-pointer ${
                   selectedColorIdx === idx
-                    ? 'ring-1 ring-offset-1 ring-[#171717] scale-110'
+                    ? 'ring-2 ring-offset-1 ring-[#0284C7] scale-110'
                     : 'border-black/20 hover:scale-105'
                 }`}
                 style={{ backgroundColor: col.hex }}
@@ -159,7 +159,7 @@ const ProductCard = ({ product }) => {
               />
             ))}
             {product.colors?.length > 3 && (
-              <span className="text-[10px] text-[#8C847A] ml-1">+{product.colors.length - 3}</span>
+              <span className="text-[10px] text-[#94A3B8] ml-1">+{product.colors.length - 3}</span>
             )}
           </div>
 
@@ -167,18 +167,18 @@ const ProductCard = ({ product }) => {
           <div className="flex items-center space-x-2">
             <div className="text-right">
               {product.oldPrice && (
-                <span className="text-xs text-[#9E968E] line-through mr-1.5 font-normal">
+                <span className="text-xs text-[#94A3B8] line-through mr-1.5 font-normal">
                   ${product.oldPrice}
                 </span>
               )}
-              <span className="font-medium text-sm sm:text-base text-[#171717]">
+              <span className="font-extrabold text-sm sm:text-base text-[#0B4D8C]">
                 ${product.price}
               </span>
             </div>
 
             <button
               onClick={() => addToCart(product, { color: currentColor?.name })}
-              className="p-2 bg-[#FAF7F2] hover:bg-[#171717] text-[#171717] hover:text-white rounded-none border border-[#E0D8CB] hover:border-[#171717] transition-colors flex-shrink-0 cursor-pointer"
+              className="p-2 bg-[#F0F7FF] hover:bg-[#0B4D8C] text-[#0B4D8C] hover:text-white rounded-lg border border-[#BAE6FD] hover:border-[#0B4D8C] transition-colors flex-shrink-0 cursor-pointer shadow-xs"
               title="Add directly to cart"
             >
               <ShoppingBag className="w-4 h-4" />

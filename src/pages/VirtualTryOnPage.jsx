@@ -32,7 +32,7 @@ const VirtualTryOnPage = () => {
           <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 border border-white/20 mb-6">
             <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
             <span className="text-[11px] font-semibold tracking-[0.3em] uppercase text-[#E7DFD5]">
-              LUMÉRA Real-Time AR Virtual Try-On Suite
+              GRAND OPTICALS Real-Time AR Virtual Try-On Suite
             </span>
           </div>
 

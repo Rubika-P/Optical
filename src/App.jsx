@@ -28,19 +28,22 @@ const Wishlist = lazy(() => import('./pages/Wishlist'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const About = lazy(() => import('./pages/About'));
 
+import ErrorBoundary from './components/ErrorBoundary';
+
 function App() {
   return (
-    <ShopProvider>
-      <Router>
-        {/* Instant Scroll Restoration on Every Route Transition */}
-        <ScrollToTop />
+    <ErrorBoundary>
+      <ShopProvider>
+        <Router>
+          {/* Instant Scroll Restoration on Every Route Transition */}
+          <ScrollToTop />
 
-        <div className="min-h-screen flex flex-col bg-[#FBF9F5] text-[#171717] selection:bg-[#C5A880] selection:text-white">
-          {/* Global Sticky Navigation */}
-          <Navbar />
+          <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A] selection:bg-[#0284C7] selection:text-white">
+            {/* Global Sticky Navigation */}
+            <Navbar />
 
-          {/* Main Route Content wrapped in Suspense with Luxury Shimmer Skeleton */}
-          <main className="flex-grow">
+            {/* Main Route Content wrapped in Suspense with Luxury Shimmer Skeleton */}
+            <main className="flex-grow">
             <Suspense fallback={<LuxurySkeletonLoader />}>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -74,6 +77,7 @@ function App() {
         </div>
       </Router>
     </ShopProvider>
+  </ErrorBoundary>
   );
 }
 

@@ -14,7 +14,7 @@ export const ShopProvider = ({ children }) => {
   // Cart state
   const [cart, setCart] = useState(() => {
     try {
-      const saved = localStorage.getItem('lumera_cart');
+      const saved = localStorage.getItem('grand_opticals_cart');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -24,7 +24,7 @@ export const ShopProvider = ({ children }) => {
   // Wishlist state
   const [wishlist, setWishlist] = useState(() => {
     try {
-      const saved = localStorage.getItem('lumera_wishlist');
+      const saved = localStorage.getItem('grand_opticals_wishlist');
       return saved ? JSON.parse(saved) : ["lumera-arc", "lumera-noir"];
     } catch {
       return ["lumera-arc", "lumera-noir"];
@@ -42,7 +42,7 @@ export const ShopProvider = ({ children }) => {
   // Coupon state
   const [appliedCoupon, setAppliedCoupon] = useState(() => {
     try {
-      const saved = localStorage.getItem('lumera_coupon');
+      const saved = localStorage.getItem('grand_opticals_coupon');
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
@@ -52,7 +52,7 @@ export const ShopProvider = ({ children }) => {
   // Appointments in localStorage
   const [appointments, setAppointments] = useState(() => {
     try {
-      const saved = localStorage.getItem('lumera_appointments');
+      const saved = localStorage.getItem('grand_opticals_appointments');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -62,7 +62,7 @@ export const ShopProvider = ({ children }) => {
   // Persist Cart
   useEffect(() => {
     try {
-      localStorage.setItem('lumera_cart', JSON.stringify(cart));
+      localStorage.setItem('grand_opticals_cart', JSON.stringify(cart));
     } catch (e) {
       console.error(e);
     }
@@ -71,7 +71,7 @@ export const ShopProvider = ({ children }) => {
   // Persist Wishlist
   useEffect(() => {
     try {
-      localStorage.setItem('lumera_wishlist', JSON.stringify(wishlist));
+      localStorage.setItem('grand_opticals_wishlist', JSON.stringify(wishlist));
     } catch (e) {
       console.error(e);
     }
@@ -80,7 +80,7 @@ export const ShopProvider = ({ children }) => {
   // Persist Appointments
   useEffect(() => {
     try {
-      localStorage.setItem('lumera_appointments', JSON.stringify(appointments));
+      localStorage.setItem('grand_opticals_appointments', JSON.stringify(appointments));
     } catch (e) {
       console.error(e);
     }
@@ -90,9 +90,9 @@ export const ShopProvider = ({ children }) => {
   useEffect(() => {
     try {
       if (appliedCoupon) {
-        localStorage.setItem('lumera_coupon', JSON.stringify(appliedCoupon));
+        localStorage.setItem('grand_opticals_coupon', JSON.stringify(appliedCoupon));
       } else {
-        localStorage.removeItem('lumera_coupon');
+        localStorage.removeItem('grand_opticals_coupon');
       }
     } catch (e) {
       console.error(e);
@@ -100,7 +100,7 @@ export const ShopProvider = ({ children }) => {
   }, [appliedCoupon]);
 
   // Trigger Toast
-  const showToast = (message, title = "LUMÉRA Boutique") => {
+  const showToast = (message, title = "Grand Opticals Eye Clinic") => {
     setToast({ message, title, id: Date.now() });
     setTimeout(() => {
       setToast(null);

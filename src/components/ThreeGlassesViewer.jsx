@@ -390,7 +390,7 @@ const ThreeGlassesViewer = ({
         <div className="bg-black/80 backdrop-blur-md px-3 py-1.5 border border-white/20 text-xs text-white flex items-center space-x-2">
           <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
           <span className="font-mono text-[11px] uppercase tracking-wider text-[#C5A880]">
-            WebGL 3D Engine · {product?.name || 'LUMÉRA FRAME'}
+            WebGL 3D Engine · {product?.name || 'GRAND OPTICALS FRAME'}
           </span>
         </div>
       </div>

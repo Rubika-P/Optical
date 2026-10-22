@@ -1,7 +1,7 @@
 export const PRODUCTS = [
   {
     id: "lumera-arc",
-    name: "LUMÉRA ARC",
+    name: "GRAND OPTICALS ARC",
     subtitle: "Architectural Hexagonal Titanium Frame",
     category: "Eyeglasses",
     price: 2850,
@@ -37,7 +37,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-noir",
-    name: "LUMÉRA NOIR",
+    name: "GRAND OPTICALS NOIR",
     subtitle: "High-Density Sculpted Bio-Acetate",
     category: "Sunglasses",
     price: 3200,
@@ -73,7 +73,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-vista",
-    name: "LUMÉRA VISTA",
+    name: "GRAND OPTICALS VISTA",
     subtitle: "Featherweight Pantos Optical Frame",
     category: "Eyeglasses",
     price: 2600,
@@ -109,7 +109,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-sol",
-    name: "LUMÉRA SOL",
+    name: "GRAND OPTICALS SOL",
     subtitle: "Modernist Aviator with Amber Tint Lenses",
     category: "Sunglasses",
     price: 3450,
@@ -145,7 +145,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-muse",
-    name: "LUMÉRA MUSE",
+    name: "GRAND OPTICALS MUSE",
     subtitle: "Refined Sculptural Cat-Eye Optical",
     category: "Eyeglasses",
     price: 2950,
@@ -181,7 +181,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-form",
-    name: "LUMÉRA FORM",
+    name: "GRAND OPTICALS FORM",
     subtitle: "Ultra-Minimalist Rimless Optical Wire",
     category: "Eyeglasses",
     price: 3100,
@@ -217,7 +217,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-aura",
-    name: "LUMÉRA AURA",
+    name: "GRAND OPTICALS AURA",
     subtitle: "Translucent Crystal Round Silhouette",
     category: "Eyeglasses",
     price: 2700,
@@ -253,7 +253,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-eclipse",
-    name: "LUMÉRA ECLIPSE",
+    name: "GRAND OPTICALS ECLIPSE",
     subtitle: "Over-Sized Monolithic Shield Sunglasses",
     category: "Sunglasses",
     price: 3600,
@@ -289,7 +289,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-strata",
-    name: "LUMÉRA STRATA",
+    name: "GRAND OPTICALS STRATA",
     subtitle: "Clubmaster-Inspired Semi-Rimless Optical",
     category: "Eyeglasses",
     price: 2750,
@@ -324,7 +324,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-helios",
-    name: "LUMÉRA HELIOS",
+    name: "GRAND OPTICALS HELIOS",
     subtitle: "Round Wire Sunglasses with Gradient Glass",
     category: "Sunglasses",
     price: 3300,
@@ -359,7 +359,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-veil",
-    name: "LUMÉRA VEIL",
+    name: "GRAND OPTICALS VEIL",
     subtitle: "Slimline Oval Bio-Acetate Optical",
     category: "Eyeglasses",
     price: 2650,
@@ -394,7 +394,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-optic-daily",
-    name: "LUMÉRA AQUA 1-DAY",
+    name: "GRAND OPTICALS AQUA 1-DAY",
     subtitle: "Breathable Bio-Hydrogel Daily Lenses (30 Pack)",
     category: "Contact Lenses",
     price: 1499,
@@ -428,7 +428,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-serene-monthly",
-    name: "LUMÉRA AIR-MOIST MONTHLY",
+    name: "GRAND OPTICALS AIR-MOIST MONTHLY",
     subtitle: "High Dk/t Extended Wear Silicone Contacts (6 Pack)",
     category: "Contact Lenses",
     price: 1999,
@@ -462,7 +462,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-terra",
-    name: "LUMÉRA TERRA",
+    name: "GRAND OPTICALS TERRA",
     subtitle: "Thick-Rimmed Geometric Square Frame",
     category: "Eyeglasses",
     price: 2900,
@@ -497,7 +497,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-zephyr",
-    name: "LUMÉRA ZEPHYR",
+    name: "GRAND OPTICALS ZEPHYR",
     subtitle: "Ultra-Curved Wrap Sport Luxury Sunglasses",
     category: "Sunglasses",
     price: 3750,
@@ -532,7 +532,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-prism",
-    name: "LUMÉRA PRISM",
+    name: "GRAND OPTICALS PRISM",
     subtitle: "Octagonal Polished Gold Wire Frame",
     category: "Eyeglasses",
     price: 2950,
@@ -567,7 +567,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-nocturne",
-    name: "LUMÉRA NOCTURNE",
+    name: "GRAND OPTICALS NOCTURNE",
     subtitle: "D-Frame Cat-Eye Dark Sunglasses",
     category: "Sunglasses",
     price: 3150,
@@ -602,7 +602,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-horizon",
-    name: "LUMÉRA HORIZON",
+    name: "GRAND OPTICALS HORIZON",
     subtitle: "Refined Wayfarer Reinterpretation",
     category: "Eyeglasses",
     price: 2800,
@@ -637,7 +637,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-oblique",
-    name: "LUMÉRA OBLIQUE",
+    name: "GRAND OPTICALS OBLIQUE",
     subtitle: "Precision Half-Rimmed Executive Optical",
     category: "Eyeglasses",
     price: 3100,
@@ -672,7 +672,7 @@ export const PRODUCTS = [
   },
   {
     id: "lumera-color-lenses",
-    name: "LUMÉRA IRIS COLORED CONTACTS",
+    name: "GRAND OPTICALS IRIS COLORED CONTACTS",
     subtitle: "Natural Blend Enhancing Monthly Lenses (2 Pack)",
     category: "Contact Lenses",
     price: 1299,
@@ -737,12 +737,12 @@ export const CATEGORIES = [
 
 export const TESTIMONIALS = [
   {
-    quote: "LUMÉRA is the rare brand that unites architectural minimalism with bespoke optical precision. Wearing the ARC titanium feels like wearing almost nothing at all.",
+    quote: "GRAND OPTICALS is the rare brand that unites architectural minimalism with bespoke optical precision. Wearing the ARC titanium feels like wearing almost nothing at all.",
     author: "Elena Rostova",
     role: "Architect & Industrial Designer",
     city: "New York",
     rating: 5,
-    frame: "LUMÉRA ARC"
+    frame: "GRAND OPTICALS ARC"
   },
   {
     quote: "The virtual face finder predicted my frame shape with uncanny accuracy. The Japanese bio-acetate finish looks and feels like a $700 designer frame.",
@@ -750,7 +750,7 @@ export const TESTIMONIALS = [
     role: "Creative Director",
     city: "London",
     rating: 5,
-    frame: "LUMÉRA NOIR"
+    frame: "GRAND OPTICALS NOIR"
   },
   {
     quote: "The blue-light transition lenses have eliminated my end-of-day eye strain completely. Beautiful packaging, sublime customer service.",
@@ -758,7 +758,7 @@ export const TESTIMONIALS = [
     role: "Software Architect",
     city: "San Francisco",
     rating: 5,
-    frame: "LUMÉRA MUSE"
+    frame: "GRAND OPTICALS MUSE"
   },
   {
     quote: "Booking the in-store eye exam was effortless, and the precision fitting session was the most thorough eye test I have ever had.",
@@ -766,14 +766,14 @@ export const TESTIMONIALS = [
     role: "Brand Strategist",
     city: "Stockholm",
     rating: 5,
-    frame: "LUMÉRA SOL"
+    frame: "GRAND OPTICALS SOL"
   }
 ];
 
 export const STORES = [
   {
     id: "nyc-soho",
-    name: "LUMÉRA New York — SoHo Flagship",
+    name: "GRAND OPTICALS New York — SoHo Flagship",
     address: "472 Broome Street, SoHo, NY 10013",
     phone: "+1 (212) 890-4421",
     hours: "Mon – Sat: 10:00 AM – 7:30 PM | Sun: 11:00 AM – 6:00 PM",
@@ -781,7 +781,7 @@ export const STORES = [
   },
   {
     id: "lon-mayfair",
-    name: "LUMÉRA London — Mayfair Studio",
+    name: "GRAND OPTICALS London — Mayfair Studio",
     address: "24 Mount Street, Mayfair, London W1K 2RH",
     phone: "+44 (0)20 7493 8812",
     hours: "Mon – Sat: 10:00 AM – 7:00 PM | Sun: 12:00 PM – 5:00 PM",
@@ -789,7 +789,7 @@ export const STORES = [
   },
   {
     id: "tok-ginza",
-    name: "LUMÉRA Tokyo — Ginza Pavilion",
+    name: "GRAND OPTICALS Tokyo — Ginza Pavilion",
     address: "6-10-1 Ginza, Chuo-ku, Tokyo 104-0061",
     phone: "+81 3 5537 9000",
     hours: "Daily: 11:00 AM – 8:00 PM",
@@ -797,7 +797,7 @@ export const STORES = [
   },
   {
     id: "par-marais",
-    name: "LUMÉRA Paris — Le Marais",
+    name: "GRAND OPTICALS Paris — Le Marais",
     address: "18 Rue de Turenne, 75004 Paris",
     phone: "+33 1 42 78 95 30",
     hours: "Tue – Sun: 11:00 AM – 7:30 PM",

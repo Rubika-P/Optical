@@ -11,7 +11,7 @@ const LuxurySkeletonLoader = () => {
             <Sparkles className="w-6 h-6 text-[#C5A880] animate-spin" style={{ animationDuration: '4s' }} />
           </div>
           <span className="font-serif tracking-[0.3em] uppercase text-xs text-[#8C847A]">
-            LUMÉRA HAUTE OPTIQUE
+            GRAND OPTICALS EYE CLINIC
           </span>
         </div>
 

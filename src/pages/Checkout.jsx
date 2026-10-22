@@ -112,7 +112,7 @@ const Checkout = () => {
               <div className="flex justify-between items-center pb-3 border-b border-[#ECE6DC]">
                 <div>
                   <span className="font-serif text-base tracking-widest text-[#171717] font-bold block">
-                    LUMÉRA ATELIER RECEIPT
+                    GRAND OPTICALS EYE CLINIC INVOICE
                   </span>
                   <span className="text-[10px] text-[#8C847A] font-mono">Invoice #{orderId} · {new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                 </div>
