@@ -26,11 +26,11 @@ const QuickViewModal = () => {
   const isSaved = wishlist.includes(quickViewProduct.id);
 
   const prescriptionOptions = [
-    { name: 'Non-prescription (Plano / Fashion)', price: '+$0' },
-    { name: 'Single Vision (Distance / Reading)', price: '+$50' },
-    { name: 'Digital Blue-Light Shield', price: '+$40' },
-    { name: 'Transitions® Light Intelligent', price: '+$80' },
-    { name: 'High-Index Ultra Thin (1.67)', price: '+$95' }
+    { name: 'Non-prescription (Plano / Fashion)', price: '+₹0' },
+    { name: 'Single Vision (Distance / Reading)', price: '+₹799' },
+    { name: 'Digital Blue-Light Shield', price: '+₹499' },
+    { name: 'Transitions® Light Intelligent', price: '+₹1,299' },
+    { name: 'High-Index Ultra Thin (1.67)', price: '+₹1,599' }
   ];
 
   const handleAdd = () => {
@@ -71,26 +71,18 @@ const QuickViewModal = () => {
               />
             </div>
 
-            {/* Virtual Try-On Prompt */}
+            {/* Quick Action Link */}
             <div className="mt-4 w-full flex items-center justify-between">
-              <button
-                onClick={() => {
-                  const p = quickViewProduct;
-                  setQuickViewProduct(null);
-                  setTryOnProduct(p);
-                }}
-                className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-[#8A6D3B] hover:text-[#171717] bg-[#EADECA]/50 hover:bg-[#EADECA] px-3.5 py-2 border border-[#C5A880]/30 transition-colors"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Launch AR Virtual Try-On</span>
-              </button>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#0284C7] bg-[#E0F2FE] px-3 py-1 rounded-full border border-[#BAE6FD]">
+                100% UV Protection
+              </span>
 
               <Link
                 to={`/product/${quickViewProduct.id}`}
                 onClick={() => setQuickViewProduct(null)}
-                className="text-xs uppercase tracking-wider text-[#6B655F] hover:text-[#171717] underline font-medium"
+                className="text-xs uppercase tracking-wider text-[#0B4D8C] hover:text-[#0284C7] underline font-bold"
               >
-                Full Details
+                View Full Specifications
               </Link>
             </div>
           </div>
@@ -116,16 +108,16 @@ const QuickViewModal = () => {
 
               {/* Price */}
               <div className="flex items-baseline space-x-3 mb-5">
-                <span className="text-2xl font-medium text-[#171717]">
-                  ${quickViewProduct.price}
+                <span className="text-2xl font-bold text-[#0B4D8C]">
+                  ₹{quickViewProduct.price.toLocaleString('en-IN')}
                 </span>
                 {quickViewProduct.oldPrice && (
-                  <span className="text-sm text-[#9E968E] line-through">
-                    ${quickViewProduct.oldPrice}
+                  <span className="text-sm text-[#94A3B8] line-through">
+                    ₹{quickViewProduct.oldPrice.toLocaleString('en-IN')}
                   </span>
                 )}
-                <span className="text-xs text-[#2E7D32] bg-[#E8F5E9] px-2 py-0.5 uppercase tracking-wider font-semibold">
-                  In Stock & Ready to Ship
+                <span className="text-xs text-[#0284C7] bg-[#E0F2FE] px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">
+                  In Stock · Ready to Ship
                 </span>
               </div>
 
@@ -142,7 +134,7 @@ const QuickViewModal = () => {
                       onClick={() => setSelectedColorIdx(idx)}
                       className={`relative w-8 h-8 rounded-full border transition-all ${
                         selectedColorIdx === idx
-                          ? 'ring-2 ring-offset-2 ring-[#171717] scale-105'
+                          ? 'ring-2 ring-offset-2 ring-[#0B4D8C] scale-105'
                           : 'border-black/20 hover:scale-105'
                       }`}
                       style={{ backgroundColor: col.hex }}
@@ -167,10 +159,10 @@ const QuickViewModal = () => {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`py-2 text-xs uppercase tracking-wider font-medium border transition-colors ${
+                      className={`py-2 text-xs uppercase tracking-wider font-semibold rounded-lg border transition-colors ${
                         selectedSize === size
-                          ? 'bg-[#171717] text-white border-[#171717]'
-                          : 'bg-white text-[#4A4744] border-[#E0D8CB] hover:border-[#171717]'
+                          ? 'bg-[#0B4D8C] text-white border-[#0B4D8C]'
+                          : 'bg-white text-[#4A4744] border-[#E0D8CB] hover:border-[#0B4D8C]'
                       }`}
                     >
                       {size}
@@ -187,7 +179,7 @@ const QuickViewModal = () => {
                 <select
                   value={selectedPrescription}
                   onChange={(e) => setSelectedPrescription(e.target.value)}
-                  className="w-full bg-white border border-[#DCD3C5] px-3 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                  className="w-full bg-white border border-[#DCD3C5] rounded-lg px-3 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#0B4D8C]"
                 >
                   {prescriptionOptions.map((opt) => (
                     <option key={opt.name} value={opt.name}>
@@ -202,7 +194,7 @@ const QuickViewModal = () => {
             <div>
               <div className="flex items-center space-x-3 mb-4">
                 {/* Quantity */}
-                <div className="flex items-center border border-[#DCD3C5] bg-white">
+                <div className="flex items-center border border-[#DCD3C5] bg-white rounded-lg overflow-hidden">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="px-3 py-2 text-sm text-[#171717] hover:bg-[#F2EDE4]"
@@ -223,7 +215,7 @@ const QuickViewModal = () => {
                 {/* Add to Bag Button */}
                 <button
                   onClick={handleAdd}
-                  className="flex-1 py-3 bg-[#171717] hover:bg-[#C5A880] text-white hover:text-[#171717] text-xs font-semibold uppercase tracking-widest transition-all duration-300 shadow-md"
+                  className="flex-1 py-3 bg-[#0B4D8C] hover:bg-[#0284C7] text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-all duration-300 shadow-md"
                 >
                   Add to Shopping Bag
                 </button>
@@ -231,12 +223,12 @@ const QuickViewModal = () => {
                 {/* Wishlist Button */}
                 <button
                   onClick={() => toggleWishlist(quickViewProduct.id)}
-                  className={`p-3 border border-[#DCD3C5] transition-colors ${
-                    isSaved ? 'bg-[#171717] text-[#C5A880]' : 'bg-white text-[#171717] hover:text-[#C5A880]'
+                  className={`p-3 border border-[#DCD3C5] rounded-lg transition-colors ${
+                    isSaved ? 'bg-[#0B4D8C] text-white' : 'bg-white text-[#171717] hover:text-[#0284C7]'
                   }`}
                   title="Save to wishlist"
                 >
-                  <Heart className={`w-4 h-4 ${isSaved ? 'fill-[#C5A880]' : ''}`} />
+                  <Heart className={`w-4 h-4 ${isSaved ? 'fill-white' : ''}`} />
                 </button>
               </div>
 

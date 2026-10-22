@@ -745,7 +745,7 @@ export const TESTIMONIALS = [
     frame: "GRAND OPTICALS ARC"
   },
   {
-    quote: "The virtual face finder predicted my frame shape with uncanny accuracy. The Japanese bio-acetate finish looks and feels like a $700 designer frame.",
+    quote: "The optical consultation predicted my frame shape with uncanny accuracy. The Japanese bio-acetate finish looks and feels like a ₹15,000 luxury boutique frame.",
     author: "Julian Vance",
     role: "Creative Director",
     city: "London",

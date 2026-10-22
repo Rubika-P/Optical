@@ -158,25 +158,25 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Col 3: Smart Tools */}
+          {/* Col 3: Customer Care & Services */}
           <div className="space-y-3">
             <h4 className="text-white font-bold uppercase tracking-wider text-xs">
-              Smart Tech
+              Services & Guides
             </h4>
             <ul className="space-y-2 text-[#94A3B8]">
               <li>
-                <Link to="/face-finder" className="hover:text-[#38BDF8] transition-colors">
-                  AI Face Shape Finder
-                </Link>
-              </li>
-              <li>
-                <Link to="/virtual-try-on" className="hover:text-[#38BDF8] transition-colors">
-                  AR 3D Virtual Try-On
-                </Link>
-              </li>
-              <li>
                 <Link to="/shop" className="hover:text-[#38BDF8] transition-colors">
-                  360° Frame Viewer
+                  Shop by Frame Shape
+                </Link>
+              </li>
+              <li>
+                <Link to="/eye-care" className="hover:text-[#38BDF8] transition-colors">
+                  Lens Power Guide
+                </Link>
+              </li>
+              <li>
+                <Link to="/book-appointment" className="hover:text-[#38BDF8] transition-colors">
+                  Free In-Clinic Eye Test
                 </Link>
               </li>
               <li>

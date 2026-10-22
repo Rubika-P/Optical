@@ -166,14 +166,11 @@ const ProductDetail = () => {
                     <Heart className={`w-5 h-5 ${isSaved ? 'fill-[#C5A880]' : ''}`} />
                   </button>
 
-                  {/* Launch AR Try-On on current product */}
-                  <button
-                    onClick={() => setTryOnProduct(product)}
-                    className="absolute bottom-4 left-4 bg-black/80 hover:bg-[#C5A880] text-white hover:text-[#141414] px-4 py-2.5 backdrop-blur-md text-xs font-semibold uppercase tracking-wider flex items-center space-x-2 transition-colors shadow-lg"
-                  >
-                    <Sparkles className="w-4 h-4 text-[#C5A880] group-hover:text-black" />
-                    <span>AR Virtual Try-On</span>
-                  </button>
+                  {/* Clinical Quality Assurance Pill */}
+                  <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-[#0284C7]/30 text-xs font-bold text-[#0B4D8C] flex items-center space-x-2 shadow-lg">
+                    <ShieldCheck className="w-4 h-4 text-[#0284C7]" />
+                    <span>Certified Grand Opticals Optical Precision</span>
+                  </div>
                 </div>
               </div>
             )}
