@@ -7,83 +7,8 @@ import {
 } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import GrandOpticalsLogo from '../components/GrandOpticalsLogo';
+import FindYourShape from '../components/FindYourShape';
 import { PRODUCTS, CATEGORIES, TESTIMONIALS } from '../data/products';
-
-const FRAME_SHAPES = [
-  {
-    name: 'Rectangle',
-    tag: 'Classic & Professional',
-    count: '180+ Designs',
-    svg: (
-      <svg className="w-12 h-6 mx-auto stroke-current fill-none stroke-[2.2]" viewBox="0 0 60 26">
-        <rect x="3" y="4" width="22" height="18" rx="3" />
-        <rect x="35" y="4" width="22" height="18" rx="3" />
-        <path d="M25 12 C28 10, 32 10, 35 12" />
-      </svg>
-    )
-  },
-  {
-    name: 'Round',
-    tag: 'Iconic & Artistic',
-    count: '120+ Designs',
-    svg: (
-      <svg className="w-12 h-6 mx-auto stroke-current fill-none stroke-[2.2]" viewBox="0 0 60 26">
-        <circle cx="15" cy="13" r="10" />
-        <circle cx="45" cy="13" r="10" />
-        <path d="M25 13 C28 10, 32 10, 35 13" />
-      </svg>
-    )
-  },
-  {
-    name: 'Cat-Eye',
-    tag: 'Chic & Uplifting',
-    count: '95+ Designs',
-    svg: (
-      <svg className="w-12 h-6 mx-auto stroke-current fill-none stroke-[2.2]" viewBox="0 0 60 26">
-        <path d="M4 14 C4 8, 12 5, 23 8 C25 15, 17 21, 10 20 C6 20, 4 17, 4 14 Z" />
-        <path d="M56 14 C56 8, 48 5, 37 8 C35 15, 43 21, 50 20 C54 20, 56 17, 56 14 Z" />
-        <path d="M23 11 C27 9, 33 9, 37 11" />
-      </svg>
-    )
-  },
-  {
-    name: 'Aviator',
-    tag: 'Timeless Navigator',
-    count: '80+ Designs',
-    svg: (
-      <svg className="w-12 h-6 mx-auto stroke-current fill-none stroke-[2.2]" viewBox="0 0 60 26">
-        <path d="M5 6 L23 6 C24 14, 21 21, 14 21 C7 21, 4 15, 5 6 Z" />
-        <path d="M55 6 L37 6 C36 14, 39 21, 46 21 C53 21, 56 15, 55 6 Z" />
-        <path d="M23 8 L37 8" />
-        <path d="M24 13 C28 11, 32 11, 36 13" />
-      </svg>
-    )
-  },
-  {
-    name: 'Square',
-    tag: 'Bold & Structured',
-    count: '110+ Designs',
-    svg: (
-      <svg className="w-12 h-6 mx-auto stroke-current fill-none stroke-[2.2]" viewBox="0 0 60 26">
-        <rect x="4" y="3" width="20" height="20" rx="4" />
-        <rect x="36" y="3" width="20" height="20" rx="4" />
-        <path d="M24 12 C28 10, 32 10, 36 12" />
-      </svg>
-    )
-  },
-  {
-    name: 'Geometric',
-    tag: 'Modern Polygonal',
-    count: '65+ Designs',
-    svg: (
-      <svg className="w-12 h-6 mx-auto stroke-current fill-none stroke-[2.2]" viewBox="0 0 60 26">
-        <polygon points="14,3 23,8 21,21 7,21 5,8" />
-        <polygon points="46,3 55,8 53,21 39,21 37,8" />
-        <path d="M23 11 C27 9, 33 9, 37 11" />
-      </svg>
-    )
-  }
-];
 
 const LENS_TECHNOLOGIES = [
   {
@@ -288,46 +213,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 2. LENSKART-STYLE: SHOP BY FRAME SHAPE */}
-      <section className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="inline-flex items-center space-x-1.5 text-xs uppercase tracking-[0.25em] text-[#0284C7] font-bold mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#0284C7]" />
-              <span>Personalized Aesthetics</span>
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B4D8C] tracking-tight">
-              Shop By Frame Shape
-            </h2>
-            <p className="text-sm text-[#64748B] mt-2">
-              Explore silhouettes scientifically curated to accentuate your cheekbones and facial symmetry.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {FRAME_SHAPES.map((shape) => (
-              <Link
-                key={shape.name}
-                to={`/shop?shape=${encodeURIComponent(shape.name)}`}
-                className="group p-5 bg-[#F8FAFC] hover:bg-[#F0F7FF] rounded-2xl border border-[#E2E8F0] hover:border-[#0284C7] transition-all duration-300 text-center flex flex-col justify-between hover:shadow-lg hover:-translate-y-1"
-              >
-                <div className="text-[#0B4D8C] group-hover:text-[#0284C7] transition-colors py-3">
-                  {shape.svg}
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[#0B4D8C] group-hover:text-[#0284C7] transition-colors">
-                    {shape.name}
-                  </h3>
-                  <p className="text-[10px] text-[#64748B] mt-0.5">{shape.tag}</p>
-                  <span className="inline-block mt-2 text-[10px] font-bold text-[#0284C7] bg-white group-hover:bg-[#E0F2FE] px-2 py-0.5 rounded-full border border-[#BAE6FD]">
-                    {shape.count}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 2. FIND YOUR SHAPE: Trending Shapes Carousel (Eyeglasses & Sunglasses) */}
+      <FindYourShape />
 
       {/* 3. CLINIC & BOUTIQUE SHOWCASE: Grand Opticals Signature Store */}
       <section className="py-20 sm:py-28 bg-[#FFFFFF] border-b border-[#E2E8F0]">

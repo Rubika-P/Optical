@@ -11,11 +11,12 @@ const Shop = () => {
   const initialCategory = searchParams.get('category') || 'All';
   const initialFilter = searchParams.get('filter') || 'all';
   const initialStyle = searchParams.get('style') || 'All';
+  const initialShape = searchParams.get('shape') || 'All';
   const initialSearch = searchParams.get('search') || '';
 
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedGender, setSelectedGender] = useState('All');
-  const [selectedShape, setSelectedShape] = useState('All');
+  const [selectedShape, setSelectedShape] = useState(initialShape);
   const [selectedSize, setSelectedSize] = useState('All');
   const [selectedColor, setSelectedColor] = useState('All');
   const [selectedStyle, setSelectedStyle] = useState(initialStyle);
@@ -30,12 +31,20 @@ const Shop = () => {
     if (cat) setSelectedCategory(cat);
     const sty = searchParams.get('style');
     if (sty) setSelectedStyle(sty);
+    const shp = searchParams.get('shape');
+    if (shp) {
+      // Normalize common variants like Cat-Eye / Cateye
+      const found = ['Round', 'Square', 'Rectangle', 'Cat Eye', 'Aviator', 'Geometric', 'Clubmaster', 'Oval'].find(
+        (s) => s.toLowerCase().replace(/[^a-z]/g, '') === shp.toLowerCase().replace(/[^a-z]/g, '')
+      );
+      setSelectedShape(found || shp);
+    }
   }, [searchParams]);
 
   // Categories list
   const categories = ['All', 'Eyeglasses', 'Sunglasses', 'Contact Lenses'];
   const genders = ['All', 'Unisex', 'Women', 'Men'];
-  const shapes = ['All', 'Round', 'Square', 'Rectangle', 'Cat Eye', 'Aviator', 'Geometric', 'Oval'];
+  const shapes = ['All', 'Round', 'Square', 'Rectangle', 'Cat Eye', 'Aviator', 'Geometric', 'Clubmaster', 'Oval'];
   const sizes = ['All', 'Small', 'Medium', 'Large'];
   const styles = ['All', 'Minimal', 'Classic', 'Trendy', 'Professional', 'Bold', 'Vintage'];
   const rims = ['All', 'Full Rim', 'Half Rim', 'Rimless'];
