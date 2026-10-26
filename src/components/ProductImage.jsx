@@ -8,6 +8,7 @@ const FALLBACK_IMAGES = {
   'Cat Eye': 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1000&q=85',
   'Aviator': 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=1000&q=85',
   'Rectangle': 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1000&q=85',
+  'Contact Lenses': '/products/contact_lens_daily.jpg',
   'default': 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1000&q=85'
 };
 
@@ -15,6 +16,7 @@ const ProductImage = ({
   src,
   alt = 'Eyewear Frame',
   frameShape = 'Geometric',
+  category = '',
   className = '',
   imgClassName = '',
   aspectRatio = 'aspect-[4/3]',
@@ -24,7 +26,8 @@ const ProductImage = ({
   const [hasError, setHasError] = useState(false);
   const [useFallback, setUseFallback] = useState(false);
 
-  const fallbackSrc = FALLBACK_IMAGES[frameShape] || FALLBACK_IMAGES.default;
+  const isContactLens = category === 'Contact Lenses' || (alt && alt.toLowerCase().includes('contact'));
+  const fallbackSrc = isContactLens ? '/products/contact_lens_daily.jpg' : (FALLBACK_IMAGES[frameShape] || FALLBACK_IMAGES.default);
   const currentSrc = hasError ? fallbackSrc : (useFallback ? fallbackSrc : (src || fallbackSrc));
 
   const handleError = () => {

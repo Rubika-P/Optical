@@ -10,6 +10,8 @@ export const AVAILABLE_COUPONS = [
   { code: 'FREESHIP', type: 'shipping', value: 0, label: 'Free Insured Courier', desc: 'Complimentary white-glove delivery' }
 ];
 
+const DEFAULT_SAMPLE_FACE = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';
+
 export const ShopProvider = ({ children }) => {
   // Cart state
   const [cart, setCart] = useState(() => {
@@ -38,6 +40,27 @@ export const ShopProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [toast, setToast] = useState(null);
+
+  // 3D Virtual Try-On Whole-Store State
+  const [isVirtualTryOnActive, setIsVirtualTryOnActive] = useState(() => {
+    try {
+      const saved = localStorage.getItem('grand_opticals_vto_active');
+      return saved === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const [userTryOnPhoto, setUserTryOnPhoto] = useState(() => {
+    try {
+      return localStorage.getItem('grand_opticals_vto_photo') || null;
+    } catch {
+      return null;
+    }
+  });
+
+  const [isLiveCameraModalOpen, setIsLiveCameraModalOpen] = useState(false);
+  const [isAiTrendModalOpen, setIsAiTrendModalOpen] = useState(false);
 
   // Coupon state
   const [appliedCoupon, setAppliedCoupon] = useState(() => {
@@ -77,6 +100,18 @@ export const ShopProvider = ({ children }) => {
     }
   }, [wishlist]);
 
+  // Persist Virtual Try-On state
+  useEffect(() => {
+    try {
+      localStorage.setItem('grand_opticals_vto_active', isVirtualTryOnActive ? 'true' : 'false');
+      if (userTryOnPhoto) {
+        localStorage.setItem('grand_opticals_vto_photo', userTryOnPhoto);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [isVirtualTryOnActive, userTryOnPhoto]);
+
   // Persist Appointments
   useEffect(() => {
     try {
@@ -105,6 +140,49 @@ export const ShopProvider = ({ children }) => {
     setTimeout(() => {
       setToast(null);
     }, 4000);
+  };
+
+  // Virtual Try-On Control Functions
+  const activateVirtualTryOn = (photoDataUrl) => {
+    const photo = photoDataUrl || DEFAULT_SAMPLE_FACE;
+    setUserTryOnPhoto(photo);
+    setIsVirtualTryOnActive(true);
+    setIsLiveCameraModalOpen(false);
+    showToast("Virtual Try-On Mode Activated! All catalog frames fitted to your photo.", "3D Try-On Active");
+  };
+
+  const turnOffVirtualTryOn = () => {
+    setIsVirtualTryOnActive(false);
+    showToast("Virtual Try-On deactivated. Returned to studio product mode.", "Standard Catalog Mode");
+  };
+
+  const toggleVirtualTryOnMode = () => {
+    if (isVirtualTryOnActive) {
+      turnOffVirtualTryOn();
+    } else {
+      if (userTryOnPhoto) {
+        setIsVirtualTryOnActive(true);
+        showToast("Virtual Try-On Mode Restored! Wearing your saved photo.", "3D Try-On Active");
+      } else {
+        setIsLiveCameraModalOpen(true);
+      }
+    }
+  };
+
+  const openLiveCameraModal = () => {
+    setIsLiveCameraModalOpen(true);
+  };
+
+  const closeLiveCameraModal = () => {
+    setIsLiveCameraModalOpen(false);
+  };
+
+  const openAiTrendModal = () => {
+    setIsAiTrendModalOpen(true);
+  };
+
+  const closeAiTrendModal = () => {
+    setIsAiTrendModalOpen(false);
   };
 
   // Add to cart
@@ -295,7 +373,20 @@ export const ShopProvider = ({ children }) => {
         isFreeShipping,
         shippingCost,
         cartTotal,
-        cartItemCount
+        cartItemCount,
+        // Virtual Try-On
+        isVirtualTryOnActive,
+        userTryOnPhoto,
+        activateVirtualTryOn,
+        turnOffVirtualTryOn,
+        toggleVirtualTryOnMode,
+        isLiveCameraModalOpen,
+        openLiveCameraModal,
+        closeLiveCameraModal,
+        // AI Daily Trend
+        isAiTrendModalOpen,
+        openAiTrendModal,
+        closeAiTrendModal
       }}
     >
       {children}

@@ -8,6 +8,8 @@ import {
 import ProductCard from '../components/ProductCard';
 import GrandOpticalsLogo from '../components/GrandOpticalsLogo';
 import FindYourShape from '../components/FindYourShape';
+import MaterialStories from '../components/MaterialStories';
+import AiDailyTrendGif from '../components/AiDailyTrendGif';
 import { PRODUCTS, CATEGORIES, TESTIMONIALS } from '../data/products';
 
 const LENS_TECHNOLOGIES = [
@@ -216,7 +218,29 @@ const Home = () => {
       {/* 2. FIND YOUR SHAPE: Trending Shapes Carousel (Eyeglasses & Sunglasses) */}
       <FindYourShape />
 
-      {/* 3. CLINIC & BOUTIQUE SHOWCASE: Grand Opticals Signature Store */}
+      {/* EXPLORE BASED ON MATERIALS: Material Stories Showcase (from Picture 1) */}
+      <MaterialStories />
+
+      {/* AI DAILY TREND ENGINE & VIRTUAL TRY-ON STUDIO */}
+      <section className="py-16 sm:py-20 bg-[#070B14] text-white border-b border-[#1E293B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-[#38BDF8] font-bold block mb-2 font-mono">
+              GENERATIVE FORECAST // TODAY'S SPECIAL
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl font-normal tracking-tight text-white mb-3">
+              Daily AI Eyewear Trend
+            </h2>
+            <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
+              Synthesized each morning based on global fashion week telemetry and optical design surges. Generate today's GIF loop or snap a photo to try the trend on your own face.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <AiDailyTrendGif embedded={true} />
+          </div>
+        </div>
+      </section>
       <section className="py-20 sm:py-28 bg-[#FFFFFF] border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14">

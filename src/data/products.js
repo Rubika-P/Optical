@@ -420,10 +420,10 @@ export const PRODUCTS = [
       origin: "Yokohama, Japan"
     },
     colors: [
-      { name: "Pure Aqua (Clear)", hex: "#87CEEB", image: "https://images.unsplash.com/photo-1587304052726-11f87cb51a37?auto=format&fit=crop&w=1000&q=85" }
+      { name: "Pure Aqua (Clear)", hex: "#87CEEB", image: "/products/contact_lens_daily.jpg" }
     ],
-    image: "https://images.unsplash.com/photo-1587304052726-11f87cb51a37?auto=format&fit=crop&w=1000&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=85",
+    image: "/products/contact_lens_daily.jpg",
+    hoverImage: "/products/contact_lens_monthly.jpg",
     faceShapes: ["Oval", "Round", "Square", "Heart", "Diamond", "Oblong"]
   },
   {
@@ -454,10 +454,10 @@ export const PRODUCTS = [
       origin: "Zurich, Switzerland"
     },
     colors: [
-      { name: "Ice Blue Tint", hex: "#B0E0E6", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=85" }
+      { name: "Ice Blue Tint", hex: "#B0E0E6", image: "/products/contact_lens_monthly.jpg" }
     ],
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1587304052726-11f87cb51a37?auto=format&fit=crop&w=1000&q=85",
+    image: "/products/contact_lens_monthly.jpg",
+    hoverImage: "/products/contact_lens_daily.jpg",
     faceShapes: ["Oval", "Round", "Square", "Heart", "Diamond", "Oblong"]
   },
   {
@@ -698,12 +698,12 @@ export const PRODUCTS = [
       origin: "Seoul, South Korea"
     },
     colors: [
-      { name: "Hazel Amber", hex: "#C59A6F", image: "https://images.unsplash.com/photo-1587304052726-11f87cb51a37?auto=format&fit=crop&w=1000&q=85" },
-      { name: "Misty Grey", hex: "#A9A9A9", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=85" },
-      { name: "Forest Emerald", hex: "#507D63", image: "https://images.unsplash.com/photo-1587304052726-11f87cb51a37?auto=format&fit=crop&w=1000&q=85" }
+      { name: "Hazel Amber", hex: "#C59A6F", image: "/products/contact_lens_colored.jpg" },
+      { name: "Misty Grey", hex: "#A9A9A9", image: "/products/contact_lens_colored.jpg" },
+      { name: "Forest Emerald", hex: "#507D63", image: "/products/contact_lens_colored.jpg" }
     ],
-    image: "https://images.unsplash.com/photo-1587304052726-11f87cb51a37?auto=format&fit=crop&w=1000&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=85",
+    image: "/products/contact_lens_colored.jpg",
+    hoverImage: "/products/contact_lens_colored.jpg",
     faceShapes: ["Oval", "Round", "Square", "Heart", "Diamond", "Oblong"]
   }
 ];
@@ -729,7 +729,7 @@ export const CATEGORIES = [
     id: "contact-lenses",
     title: "Contact Lenses",
     subtitle: "Comfortable, crystal-clear vision for every lifestyle.",
-    image: "https://images.unsplash.com/photo-1587304052726-11f87cb51a37?auto=format&fit=crop&w=1200&q=85",
+    image: "/products/contact_lens_daily.jpg",
     count: "3 Formulas",
     tag: "Smart Hydration"
   }
