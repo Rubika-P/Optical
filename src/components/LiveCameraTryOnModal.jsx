@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Camera, X, RefreshCw, Check, Upload, Sparkles, AlertCircle, Eye, Sliders, ArrowRight } from 'lucide-react';
+import { Camera, X, RefreshCw, Check, Upload, Sparkles, AlertCircle, Eye, Sliders, ArrowRight, ChevronUp, ChevronDown, Plus, Minus } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 
 const SAMPLE_FACES = [
@@ -9,7 +9,15 @@ const SAMPLE_FACES = [
 ];
 
 const LiveCameraTryOnModal = () => {
-  const { isLiveCameraModalOpen, closeLiveCameraModal, activateVirtualTryOn } = useShop();
+  const { 
+    isLiveCameraModalOpen, 
+    closeLiveCameraModal, 
+    activateVirtualTryOn,
+    tryOnPosition,
+    updateTryOnPosition,
+    adjustTryOnY,
+    adjustTryOnScale
+  } = useShop();
 
   const [cameraActive, setCameraActive] = useState(false);
   const [cameraError, setCameraError] = useState(null);
@@ -17,10 +25,22 @@ const LiveCameraTryOnModal = () => {
   const [countdown, setCountdown] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  // Local calibration state for the preview
+  const [previewY, setPreviewY] = useState(tryOnPosition?.y || 50.5);
+  const [previewScale, setPreviewScale] = useState(tryOnPosition?.scale || 52);
+
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
+
+  // Sync initial position when modal opens
+  useEffect(() => {
+    if (tryOnPosition) {
+      setPreviewY(tryOnPosition.y || 50.5);
+      setPreviewScale(tryOnPosition.scale || 52);
+    }
+  }, [tryOnPosition, isLiveCameraModalOpen]);
 
   // Initialize camera when modal opens
   useEffect(() => {
@@ -135,7 +155,7 @@ const LiveCameraTryOnModal = () => {
     if (!capturedPhoto) return;
     setIsProcessing(true);
     setTimeout(() => {
-      activateVirtualTryOn(capturedPhoto);
+      activateVirtualTryOn(capturedPhoto, { y: previewY, scale: previewScale });
       setIsProcessing(false);
     }, 400);
   };
@@ -155,11 +175,11 @@ const LiveCameraTryOnModal = () => {
               <h3 className="text-base sm:text-lg font-bold text-white flex items-center space-x-2">
                 <span>3D Virtual Try-On Studio</span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#38BDF8]/20 text-[#38BDF8] font-mono font-bold">
-                  LIVE AI FIT
+                  PRECISION FIT
                 </span>
               </h3>
               <p className="text-xs text-[#94A3B8]">
-                Take or choose a photo — all glasses in the store will display you wearing each frame!
+                Take photo or pick model — all glasses will show you wearing them directly over your eyes!
               </p>
             </div>
           </div>
@@ -189,48 +209,52 @@ const LiveCameraTryOnModal = () => {
                   className="w-full h-full object-cover object-center"
                 />
 
-                {/* Simulated Overlay Glasses on Bridge */}
+                {/* Simulated Overlay Glasses accurately sitting on eye-line */}
                 <div
-                  className="absolute pointer-events-none transition-all duration-300"
+                  className="absolute pointer-events-none transition-all duration-150"
                   style={{
-                    top: '43%',
+                    top: `${previewY}%`,
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: '46%'
+                    width: `${previewScale}%`
                   }}
                 >
-                  {/* Chic overlay glasses illustration */}
-                  <svg viewBox="0 0 300 90" className="w-full drop-shadow-2xl">
+                  {/* Calibrated realistic glasses silhouette with nose bridge and reflections */}
+                  <svg viewBox="0 0 280 100" className="w-full" style={{ filter: 'drop-shadow(0 6px 12px rgba(0,0,0,0.65))' }}>
                     <defs>
-                      <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#C5A880" />
-                        <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#C5A880" />
-                      </linearGradient>
-                      <linearGradient id="lensReflect" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.35" />
-                        <stop offset="60%" stopColor="#FFFFFF" stopOpacity="0.1" />
+                      <linearGradient id="prevLensReflect" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.3" />
+                        <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.15" />
                         <stop offset="100%" stopColor="#0284C7" stopOpacity="0.25" />
+                      </linearGradient>
+                      <linearGradient id="prevFrameGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#C5A880" />
+                        <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.9" />
+                        <stop offset="100%" stopColor="#C5A880" />
                       </linearGradient>
                     </defs>
                     {/* Bridge */}
-                    <path d="M 125 35 Q 150 24 175 35" fill="none" stroke="url(#frameGrad)" strokeWidth="4.5" strokeLinecap="round" />
+                    <path d="M 120 46 Q 140 35 160 46" fill="none" stroke="url(#prevFrameGrad)" strokeWidth="5.5" strokeLinecap="round" />
+                    {/* Nose pads */}
+                    <path d="M 124 52 Q 120 61 122 65" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 156 52 Q 160 61 158 65" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
                     {/* Left Frame */}
-                    <rect x="18" y="12" width="105" height="66" rx="18" fill="url(#lensReflect)" stroke="url(#frameGrad)" strokeWidth="5.5" />
+                    <rect x="22" y="20" width="98" height="60" rx="10" fill="url(#prevLensReflect)" stroke="url(#prevFrameGrad)" strokeWidth="6" />
                     {/* Right Frame */}
-                    <rect x="177" y="12" width="105" height="66" rx="18" fill="url(#lensReflect)" stroke="url(#frameGrad)" strokeWidth="5.5" />
+                    <rect x="160" y="20" width="98" height="60" rx="10" fill="url(#prevLensReflect)" stroke="url(#prevFrameGrad)" strokeWidth="6" />
+                    {/* Temples */}
+                    <line x1="22" y1="30" x2="2" y2="24" stroke="url(#prevFrameGrad)" strokeWidth="5" strokeLinecap="round" />
+                    <line x1="258" y1="30" x2="278" y2="24" stroke="url(#prevFrameGrad)" strokeWidth="5" strokeLinecap="round" />
                     {/* Glare shine */}
-                    <line x1="35" y1="20" x2="65" y2="60" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.5" strokeLinecap="round" />
-                    <line x1="195" y1="20" x2="225" y2="60" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.5" strokeLinecap="round" />
+                    <line x1="40" y1="28" x2="68" y2="68" stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.5" strokeLinecap="round" />
+                    <line x1="178" y1="28" x2="206" y2="68" stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.5" strokeLinecap="round" />
                   </svg>
                 </div>
 
-                {/* Success Watermark */}
-                <div className="absolute bottom-3 inset-x-3 flex items-center justify-between pointer-events-none">
-                  <div className="glass-dark px-3 py-1.5 rounded-full border border-white/20 text-[11px] font-bold text-white flex items-center space-x-2">
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Photo Ready for All Glasses</span>
-                  </div>
+                {/* Eye Line Alignment Crosshair Hint */}
+                <div className="absolute top-3 left-3 glass-dark px-3 py-1 rounded-full border border-white/20 text-[11px] font-bold text-white flex items-center space-x-1.5 shadow-md">
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Aligned at {previewY}% Eye-Height</span>
                 </div>
               </div>
             ) : (
@@ -246,14 +270,15 @@ const LiveCameraTryOnModal = () => {
                   }`}
                 />
 
-                {/* Oval Face Guide Overlay */}
+                {/* Oval Face Guide Overlay with Eye Line explicitly marked */}
                 {cameraActive && (
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                    <div className="w-56 h-72 sm:w-64 sm:h-80 border-2 border-dashed border-[#38BDF8]/60 rounded-[50%] flex items-center justify-center shadow-[0_0_40px_rgba(56,189,248,0.2)]">
+                    <div className="w-56 h-72 sm:w-64 sm:h-80 border-2 border-dashed border-[#38BDF8]/70 rounded-[50%] flex items-center justify-center shadow-[0_0_40px_rgba(56,189,248,0.25)] relative">
+                      {/* Dotted Eye-line guide directly at 50% height */}
                       <div className="w-full flex items-center justify-center px-4">
-                        <div className="w-full h-0.5 border-t border-dotted border-white/40 relative">
-                          <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] uppercase font-mono tracking-wider text-[#BAE6FD] bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm">
-                            Align Eye Line
+                        <div className="w-full h-0.5 border-t-2 border-dotted border-[#38BDF8] relative">
+                          <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] uppercase font-mono font-bold tracking-wider text-white bg-[#0284C7] px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
+                            👀 Position Eyes Along This Line
                           </span>
                         </div>
                       </div>
@@ -263,7 +288,7 @@ const LiveCameraTryOnModal = () => {
 
                 {/* Countdown Overlay */}
                 {countdown !== null && (
-                  <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-30">
+                  <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-30">
                     <span className="text-7xl font-extrabold text-[#38BDF8] animate-ping font-mono">
                       {countdown}
                     </span>
@@ -301,24 +326,84 @@ const LiveCameraTryOnModal = () => {
 
           {/* Primary Controls */}
           {capturedPhoto ? (
-            <div className="flex flex-col sm:flex-row items-center gap-3">
-              <button
-                onClick={handleRetake}
-                className="w-full sm:w-1/3 py-3 px-4 rounded-xl border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all cursor-pointer"
-              >
-                <RefreshCw className="w-4 h-4" />
-                <span>Retake Photo</span>
-              </button>
+            <div className="space-y-4">
+              {/* Fine-Tuning Calibration Controls for User */}
+              <div className="bg-white/[0.04] p-3 rounded-2xl border border-white/10">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-bold text-[#38BDF8] flex items-center space-x-1.5">
+                    <Sliders className="w-3.5 h-3.5" />
+                    <span>Adjust Glasses Position Over Eyes</span>
+                  </span>
+                  <span className="text-[10px] text-white/50 font-mono">
+                    Y: {previewY}% | Size: {previewScale}%
+                  </span>
+                </div>
 
-              <button
-                onClick={handleConfirmTryOn}
-                disabled={isProcessing}
-                className="w-full sm:flex-1 py-3 px-6 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] hover:from-[#0B4D8C] hover:to-[#0284C7] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-xl hover:shadow-cyan-500/25 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>{isProcessing ? 'Fitting Catalog...' : 'Activate Store Virtual Try-On'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  {/* Move Up/Down */}
+                  <div className="flex items-center justify-between bg-black/40 p-2 rounded-xl border border-white/5">
+                    <span className="text-[11px] text-[#94A3B8]">Move Vertical:</span>
+                    <div className="flex items-center space-x-1">
+                      <button
+                        onClick={() => setPreviewY((y) => Math.max(38, parseFloat((y - 1).toFixed(1))))}
+                        className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white"
+                        title="Move Higher"
+                      >
+                        <ChevronUp className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => setPreviewY((y) => Math.min(62, parseFloat((y + 1).toFixed(1))))}
+                        className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white"
+                        title="Move Lower"
+                      >
+                        <ChevronDown className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Frame Size */}
+                  <div className="flex items-center justify-between bg-black/40 p-2 rounded-xl border border-white/5">
+                    <span className="text-[11px] text-[#94A3B8]">Frame Size:</span>
+                    <div className="flex items-center space-x-1">
+                      <button
+                        onClick={() => setPreviewScale((s) => Math.max(40, parseFloat((s - 2).toFixed(1))))}
+                        className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white"
+                        title="Smaller Frame"
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => setPreviewScale((s) => Math.min(68, parseFloat((s + 2).toFixed(1))))}
+                        className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white"
+                        title="Larger Frame"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Confirm / Retake Buttons */}
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <button
+                  onClick={handleRetake}
+                  className="w-full sm:w-1/3 py-3 px-4 rounded-xl border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all cursor-pointer"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  <span>Retake Photo</span>
+                </button>
+
+                <button
+                  onClick={handleConfirmTryOn}
+                  disabled={isProcessing}
+                  className="w-full sm:flex-1 py-3 px-6 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] hover:from-[#0B4D8C] hover:to-[#0284C7] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-xl hover:shadow-cyan-500/25 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>{isProcessing ? 'Fitting Catalog...' : 'Confirm & Fit All Glasses'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           ) : (
             <div className="space-y-4">

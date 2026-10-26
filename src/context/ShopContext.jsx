@@ -59,6 +59,16 @@ export const ShopProvider = ({ children }) => {
     }
   });
 
+  // Precise Eyewear Alignment Calibration (Height, Scale, Horizontal offset)
+  const [tryOnPosition, setTryOnPosition] = useState(() => {
+    try {
+      const saved = localStorage.getItem('grand_opticals_vto_pos');
+      return saved ? JSON.parse(saved) : { y: 50.5, scale: 52, x: 50 };
+    } catch {
+      return { y: 50.5, scale: 52, x: 50 };
+    }
+  });
+
   const [isLiveCameraModalOpen, setIsLiveCameraModalOpen] = useState(false);
   const [isAiTrendModalOpen, setIsAiTrendModalOpen] = useState(false);
 
@@ -100,17 +110,18 @@ export const ShopProvider = ({ children }) => {
     }
   }, [wishlist]);
 
-  // Persist Virtual Try-On state
+  // Persist Virtual Try-On state & position
   useEffect(() => {
     try {
       localStorage.setItem('grand_opticals_vto_active', isVirtualTryOnActive ? 'true' : 'false');
       if (userTryOnPhoto) {
         localStorage.setItem('grand_opticals_vto_photo', userTryOnPhoto);
       }
+      localStorage.setItem('grand_opticals_vto_pos', JSON.stringify(tryOnPosition));
     } catch (e) {
       console.error(e);
     }
-  }, [isVirtualTryOnActive, userTryOnPhoto]);
+  }, [isVirtualTryOnActive, userTryOnPhoto, tryOnPosition]);
 
   // Persist Appointments
   useEffect(() => {
@@ -143,9 +154,12 @@ export const ShopProvider = ({ children }) => {
   };
 
   // Virtual Try-On Control Functions
-  const activateVirtualTryOn = (photoDataUrl) => {
+  const activateVirtualTryOn = (photoDataUrl, customPos = null) => {
     const photo = photoDataUrl || DEFAULT_SAMPLE_FACE;
     setUserTryOnPhoto(photo);
+    if (customPos) {
+      setTryOnPosition(prev => ({ ...prev, ...customPos }));
+    }
     setIsVirtualTryOnActive(true);
     setIsLiveCameraModalOpen(false);
     showToast("Virtual Try-On Mode Activated! All catalog frames fitted to your photo.", "3D Try-On Active");
@@ -167,6 +181,30 @@ export const ShopProvider = ({ children }) => {
         setIsLiveCameraModalOpen(true);
       }
     }
+  };
+
+  // Fine-tune glasses position on face
+  const updateTryOnPosition = (newPos) => {
+    setTryOnPosition(prev => ({ ...prev, ...newPos }));
+  };
+
+  const adjustTryOnY = (delta) => {
+    setTryOnPosition(prev => ({
+      ...prev,
+      y: Math.min(65, Math.max(35, parseFloat((prev.y + delta).toFixed(1))))
+    }));
+  };
+
+  const adjustTryOnScale = (delta) => {
+    setTryOnPosition(prev => ({
+      ...prev,
+      scale: Math.min(70, Math.max(38, parseFloat((prev.scale + delta).toFixed(1))))
+    }));
+  };
+
+  const resetTryOnPosition = () => {
+    setTryOnPosition({ y: 50.5, scale: 52, x: 50 });
+    showToast("Glasses alignment reset to default eye-line.", "Alignment Reset");
   };
 
   const openLiveCameraModal = () => {
@@ -377,6 +415,11 @@ export const ShopProvider = ({ children }) => {
         // Virtual Try-On
         isVirtualTryOnActive,
         userTryOnPhoto,
+        tryOnPosition,
+        updateTryOnPosition,
+        adjustTryOnY,
+        adjustTryOnScale,
+        resetTryOnPosition,
         activateVirtualTryOn,
         turnOffVirtualTryOn,
         toggleVirtualTryOnMode,

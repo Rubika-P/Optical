@@ -4,94 +4,136 @@ import { Heart, Eye, ShoppingBag, Check, Layers, Sparkles, Camera } from 'lucide
 import { useShop } from '../context/ShopContext';
 import ProductImage from './ProductImage';
 
-// Frame SVG silhouette generator for virtual try-on on face
+// Highly Realistic Eyewear Overlay for Face Try-On
 const GlassesFaceOverlay = ({ shape = 'Geometric', colorHex = '#1A1A1A', isSunglasses = false }) => {
   const isDarkTint = isSunglasses;
-  const lensFill = isDarkTint ? 'rgba(20, 24, 33, 0.82)' : 'rgba(186, 230, 253, 0.22)';
-  const strokeColor = colorHex || '#222222';
+  const lensFill = isDarkTint ? 'rgba(15, 23, 42, 0.84)' : 'rgba(224, 242, 254, 0.22)';
+  const strokeColor = colorHex || '#262626';
 
-  // Different geometry paths by shape
+  // Different geometry paths by shape calibrated with realistic nose pads and temple depth
   switch (shape) {
     case 'Round':
       return (
-        <svg viewBox="0 0 280 90" className="w-full drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]">
+        <svg viewBox="0 0 280 100" className="w-full" style={{ filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.55))' }}>
+          <defs>
+            <linearGradient id="lensShineRound" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.45" />
+              <stop offset="40%" stopColor="#38BDF8" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
           {/* Bridge */}
-          <path d="M 120 42 Q 140 32 160 42" fill="none" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          <path d="M 118 48 Q 140 36 162 48" fill="none" stroke={strokeColor} strokeWidth="5" strokeLinecap="round" />
+          {/* Nose pads */}
+          <path d="M 124 53 Q 120 62 122 66" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M 156 53 Q 160 62 158 66" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" />
           {/* Left Rim */}
-          <ellipse cx="72" cy="45" rx="46" ry="36" fill={lensFill} stroke={strokeColor} strokeWidth="5" />
+          <ellipse cx="72" cy="50" rx="46" ry="38" fill={lensFill} stroke={strokeColor} strokeWidth="5.5" />
+          <ellipse cx="72" cy="50" rx="43" ry="35" fill="none" stroke={strokeColor} strokeWidth="1" strokeOpacity="0.4" />
           {/* Right Rim */}
-          <ellipse cx="208" cy="45" rx="46" ry="36" fill={lensFill} stroke={strokeColor} strokeWidth="5" />
+          <ellipse cx="208" cy="50" rx="46" ry="38" fill={lensFill} stroke={strokeColor} strokeWidth="5.5" />
+          <ellipse cx="208" cy="50" rx="43" ry="35" fill="none" stroke={strokeColor} strokeWidth="1" strokeOpacity="0.4" />
           {/* Temple hinges */}
-          <line x1="26" y1="45" x2="4" y2="40" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
-          <line x1="254" y1="45" x2="276" y2="40" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
-          {/* Lens reflection */}
-          <line x1="48" y1="28" x2="68" y2="60" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.45" strokeLinecap="round" />
-          <line x1="184" y1="28" x2="204" y2="60" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.45" strokeLinecap="round" />
+          <line x1="26" y1="50" x2="4" y2="44" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          <line x1="254" y1="50" x2="276" y2="44" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          {/* Lens reflections */}
+          <ellipse cx="64" cy="42" rx="28" ry="18" fill="url(#lensShineRound)" transform="rotate(-20 64 42)" />
+          <ellipse cx="200" cy="42" rx="28" ry="18" fill="url(#lensShineRound)" transform="rotate(-20 200 42)" />
         </svg>
       );
     case 'Square':
     case 'Rectangle':
       return (
-        <svg viewBox="0 0 280 90" className="w-full drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]">
+        <svg viewBox="0 0 280 100" className="w-full" style={{ filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.55))' }}>
+          <defs>
+            <linearGradient id="lensShineSquare" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.4" />
+              <stop offset="45%" stopColor="#38BDF8" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
           {/* Bridge */}
-          <path d="M 122 38 Q 140 30 158 38" fill="none" stroke={strokeColor} strokeWidth="5" strokeLinecap="round" />
+          <path d="M 120 44 Q 140 35 160 44" fill="none" stroke={strokeColor} strokeWidth="5.5" strokeLinecap="round" />
+          {/* Nose pads */}
+          <path d="M 124 50 Q 120 59 122 63" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M 156 50 Q 160 59 158 63" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" />
           {/* Left Rim */}
-          <rect x="24" y="16" width="98" height="58" rx="8" fill={lensFill} stroke={strokeColor} strokeWidth="5.5" />
+          <rect x="22" y="20" width="98" height="60" rx="9" fill={lensFill} stroke={strokeColor} strokeWidth="6" />
+          <rect x="25" y="23" width="92" height="54" rx="7" fill="none" stroke={strokeColor} strokeWidth="1" strokeOpacity="0.35" />
           {/* Right Rim */}
-          <rect x="158" y="16" width="98" height="58" rx="8" fill={lensFill} stroke={strokeColor} strokeWidth="5.5" />
+          <rect x="160" y="20" width="98" height="60" rx="9" fill={lensFill} stroke={strokeColor} strokeWidth="6" />
+          <rect x="163" y="23" width="92" height="54" rx="7" fill="none" stroke={strokeColor} strokeWidth="1" strokeOpacity="0.35" />
           {/* Temples */}
-          <line x1="24" y1="26" x2="2" y2="20" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
-          <line x1="256" y1="26" x2="278" y2="20" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
-          {/* Lens reflection */}
-          <line x1="42" y1="24" x2="65" y2="62" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
-          <line x1="176" y1="24" x2="199" y2="62" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
+          <line x1="22" y1="30" x2="2" y2="24" stroke={strokeColor} strokeWidth="5" strokeLinecap="round" />
+          <line x1="258" y1="30" x2="278" y2="24" stroke={strokeColor} strokeWidth="5" strokeLinecap="round" />
+          {/* Lens reflections */}
+          <line x1="42" y1="28" x2="68" y2="68" stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.45" strokeLinecap="round" />
+          <line x1="180" y1="28" x2="206" y2="68" stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.45" strokeLinecap="round" />
         </svg>
       );
     case 'Cat Eye':
       return (
-        <svg viewBox="0 0 280 90" className="w-full drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]">
+        <svg viewBox="0 0 280 100" className="w-full" style={{ filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.55))' }}>
           {/* Bridge */}
-          <path d="M 124 40 Q 140 30 156 40" fill="none" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          <path d="M 122 46 Q 140 36 158 46" fill="none" stroke={strokeColor} strokeWidth="5" strokeLinecap="round" />
           {/* Left Cat Eye */}
-          <path d="M 22 22 Q 80 12 124 38 Q 110 76 56 68 Q 20 62 22 22 Z" fill={lensFill} stroke={strokeColor} strokeWidth="5.5" strokeLinejoin="round" />
+          <path d="M 20 25 Q 80 14 122 42 Q 112 80 54 72 Q 16 66 20 25 Z" fill={lensFill} stroke={strokeColor} strokeWidth="6" strokeLinejoin="round" />
           {/* Right Cat Eye */}
-          <path d="M 258 22 Q 200 12 156 38 Q 170 76 224 68 Q 260 62 258 22 Z" fill={lensFill} stroke={strokeColor} strokeWidth="5.5" strokeLinejoin="round" />
+          <path d="M 260 25 Q 200 14 158 42 Q 168 80 226 72 Q 264 66 260 25 Z" fill={lensFill} stroke={strokeColor} strokeWidth="6" strokeLinejoin="round" />
           {/* Temples */}
-          <line x1="22" y1="22" x2="4" y2="18" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
-          <line x1="258" y1="22" x2="276" y2="18" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
+          <line x1="20" y1="25" x2="4" y2="20" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          <line x1="260" y1="25" x2="276" y2="20" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          {/* Lens reflection */}
+          <line x1="42" y1="34" x2="65" y2="68" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
+          <line x1="182" y1="34" x2="205" y2="68" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
         </svg>
       );
     case 'Aviator':
       return (
-        <svg viewBox="0 0 280 90" className="w-full drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]">
+        <svg viewBox="0 0 280 100" className="w-full" style={{ filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.55))' }}>
           {/* Top Brow Bar & Bridge */}
-          <line x1="60" y1="20" x2="220" y2="20" stroke={strokeColor} strokeWidth="3" />
-          <path d="M 122 36 Q 140 30 158 36" fill="none" stroke={strokeColor} strokeWidth="3.5" strokeLinecap="round" />
+          <line x1="60" y1="24" x2="220" y2="24" stroke={strokeColor} strokeWidth="3.5" />
+          <path d="M 120 42 Q 140 34 160 42" fill="none" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
           {/* Left Teardrop */}
-          <path d="M 30 22 C 80 16 122 24 122 42 C 122 72 74 76 44 64 C 26 56 24 34 30 22 Z" fill={lensFill} stroke={strokeColor} strokeWidth="4" />
+          <path d="M 28 26 C 80 20 120 28 120 46 C 120 78 72 82 42 70 C 24 60 22 38 28 26 Z" fill={lensFill} stroke={strokeColor} strokeWidth="4.5" />
           {/* Right Teardrop */}
-          <path d="M 250 22 C 200 16 158 24 158 42 C 158 72 206 76 236 64 C 254 56 256 34 250 22 Z" fill={lensFill} stroke={strokeColor} strokeWidth="4" />
+          <path d="M 252 26 C 200 20 160 28 160 46 C 160 78 208 82 238 70 C 256 60 258 38 252 26 Z" fill={lensFill} stroke={strokeColor} strokeWidth="4.5" />
           {/* Temples */}
-          <line x1="30" y1="26" x2="6" y2="22" stroke={strokeColor} strokeWidth="3.5" strokeLinecap="round" />
-          <line x1="250" y1="26" x2="274" y2="22" stroke={strokeColor} strokeWidth="3.5" strokeLinecap="round" />
+          <line x1="28" y1="30" x2="4" y2="26" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
+          <line x1="252" y1="30" x2="276" y2="26" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
+          {/* Glare */}
+          <line x1="50" y1="34" x2="74" y2="70" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
+          <line x1="182" y1="34" x2="206" y2="70" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
         </svg>
       );
     default:
       // Geometric / Hexagonal default
       return (
-        <svg viewBox="0 0 280 90" className="w-full drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]">
+        <svg viewBox="0 0 280 100" className="w-full" style={{ filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.55))' }}>
+          <defs>
+            <linearGradient id="lensShineGeo" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.45" />
+              <stop offset="45%" stopColor="#38BDF8" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
           {/* Bridge */}
-          <path d="M 122 40 Q 140 30 158 40" fill="none" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          <path d="M 120 46 Q 140 36 160 46" fill="none" stroke={strokeColor} strokeWidth="5.5" strokeLinecap="round" />
+          {/* Nose pads */}
+          <path d="M 124 52 Q 120 61 122 65" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M 156 52 Q 160 61 158 65" fill="none" stroke="#D1D5DB" strokeWidth="2.5" strokeLinecap="round" />
           {/* Left Hexagonal */}
-          <polygon points="54,18 98,18 122,42 98,68 54,68 30,42" fill={lensFill} stroke={strokeColor} strokeWidth="5" strokeLinejoin="round" />
+          <polygon points="52,22 98,22 122,48 98,74 52,74 26,48" fill={lensFill} stroke={strokeColor} strokeWidth="6" strokeLinejoin="round" />
+          <polygon points="54,25 96,25 118,48 96,71 54,71 30,48" fill="none" stroke={strokeColor} strokeWidth="1" strokeOpacity="0.35" />
           {/* Right Hexagonal */}
-          <polygon points="182,18 226,18 250,42 226,68 182,68 158,42" fill={lensFill} stroke={strokeColor} strokeWidth="5" strokeLinejoin="round" />
+          <polygon points="182,22 228,22 254,48 228,74 182,74 158,48" fill={lensFill} stroke={strokeColor} strokeWidth="6" strokeLinejoin="round" />
+          <polygon points="184,25 226,25 250,48 226,71 184,71 162,48" fill="none" stroke={strokeColor} strokeWidth="1" strokeOpacity="0.35" />
           {/* Temples */}
-          <line x1="30" y1="42" x2="6" y2="38" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
-          <line x1="250" y1="42" x2="274" y2="38" stroke={strokeColor} strokeWidth="4" strokeLinecap="round" />
-          {/* Glare */}
-          <line x1="50" y1="26" x2="72" y2="58" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
-          <line x1="178" y1="26" x2="200" y2="58" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.4" strokeLinecap="round" />
+          <line x1="26" y1="48" x2="4" y2="42" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          <line x1="254" y1="48" x2="276" y2="42" stroke={strokeColor} strokeWidth="4.5" strokeLinecap="round" />
+          {/* Glare reflections */}
+          <line x1="50" y1="30" x2="74" y2="66" stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.45" strokeLinecap="round" />
+          <line x1="180" y1="30" x2="204" y2="66" stroke="#FFFFFF" strokeWidth="3" strokeOpacity="0.45" strokeLinecap="round" />
         </svg>
       );
   }
@@ -106,6 +148,7 @@ const ProductCard = ({ product }) => {
     addToCart,
     isVirtualTryOnActive,
     userTryOnPhoto,
+    tryOnPosition = { y: 50.5, scale: 52, x: 50 },
     openLiveCameraModal
   } = useShop();
 
@@ -118,7 +161,13 @@ const ProductCard = ({ product }) => {
   const displayImage = currentColor?.image || product.image;
 
   const isContactLens = product.category === 'Contact Lenses';
-  const showVirtualTryOn = isVirtualTryOnActive && userTryOnPhoto && !peekOriginal && !isContactLens;
+  const showVirtualTryOn = isVirtualTryOnActive && userTryOnPhoto && !peekOriginal;
+
+  // Calibrated size multiplier based on frame category and frame size
+  const sizeMultiplier = product.frameSize === 'Large' ? 1.08 : product.frameSize === 'Small' ? 0.94 : 1.0;
+  const targetScale = (tryOnPosition.scale || 52) * sizeMultiplier;
+  const targetY = tryOnPosition.y || 50.5;
+  const targetX = tryOnPosition.x || 50;
 
   return (
     <div
@@ -179,18 +228,18 @@ const ProductCard = ({ product }) => {
             <img
               src={userTryOnPhoto}
               alt={`Virtual Try-On for ${product.name}`}
-              className="w-full h-full object-cover object-center scale-105 transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover object-center scale-105 transition-transform duration-700 group-hover:scale-108"
             />
 
-            {/* Overlaid Glasses accurately sitting on bridge */}
+            {/* Overlaid Glasses calibrated precisely to the eye-line */}
             {!isContactLens && (
               <div
-                className="absolute pointer-events-none transition-all duration-300"
+                className="absolute pointer-events-none transition-all duration-200"
                 style={{
-                  top: '43.5%',
-                  left: '50%',
+                  top: `${targetY}%`,
+                  left: `${targetX}%`,
                   transform: 'translate(-50%, -50%)',
-                  width: product.frameSize === 'Large' ? '50%' : product.frameSize === 'Small' ? '42%' : '46%'
+                  width: `${targetScale}%`
                 }}
               >
                 <GlassesFaceOverlay
@@ -203,7 +252,7 @@ const ProductCard = ({ product }) => {
 
             {/* Contact lens hydration glow if contact lenses */}
             {isContactLens && (
-              <div className="absolute inset-0 pointer-events-none bg-radial from-cyan-400/20 via-transparent to-transparent flex items-center justify-center">
+              <div className="absolute inset-0 pointer-events-none bg-radial from-cyan-400/25 via-transparent to-transparent flex items-center justify-center">
                 <span className="text-[10px] font-mono px-2 py-1 rounded-full bg-cyan-900/80 text-cyan-200 border border-cyan-400/30">
                   ✨ Smart Hydration Fit
                 </span>
@@ -217,7 +266,7 @@ const ProductCard = ({ product }) => {
                 e.stopPropagation();
                 setPeekOriginal(true);
               }}
-              className="absolute bottom-2 right-2 z-20 px-2 py-1 rounded bg-black/70 hover:bg-black text-[9px] font-bold text-white uppercase tracking-wider backdrop-blur-sm border border-white/20 transition-colors cursor-pointer"
+              className="absolute bottom-2 right-2 z-20 px-2 py-1 rounded bg-black/75 hover:bg-black text-[9px] font-bold text-white uppercase tracking-wider backdrop-blur-sm border border-white/20 transition-colors cursor-pointer"
               title="Peek product photo"
             >
               Original View
